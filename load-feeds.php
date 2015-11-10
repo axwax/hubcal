@@ -1,6 +1,6 @@
 <?
 require 'class.iCalReader.php';
-require '../../includes/db-functions.php';
+require '../includes/db-functions.php';
 db_auth();
 $category = $_POST['category'];
 $category = 1;

@@ -1,7 +1,7 @@
 <?php
 
 require_once('iCalcreator/iCalcreator.php');
-require '../../includes/db-functions.php';
+require '../includes/db-functions.php';
 db_auth();
 
 $requestedFeeds = $_GET['feeds'];

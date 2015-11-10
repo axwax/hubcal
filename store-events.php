@@ -1,7 +1,7 @@
 <?php
 
 require 'class.iCalReader.php';
-require '../../includes/db-functions.php';
+require '../includes/db-functions.php';
 db_auth();
 
 // delete all existing events
