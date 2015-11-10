@@ -14,7 +14,8 @@ foreach($requestedFeedsArray as $feedID){
 
 $requestedFeeds=implode(',',$requestedFeedsArray);
 
-$path = '/var/www/vhosts/gigx.co.uk/httpdocs/green-calendar/export/';
+$path = '/var/www/vhosts/green-calendar.gigx.co.uk/export/';
+
 $file = hash('md5',$requestedFeeds).'.ics';
 
 if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
@@ -23,10 +24,6 @@ if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
   readfile($path.$file);
   die;
 }
-//if($requestedFeeds){
-  //$requestedFeedIDs = array_keys($requestedFeeds);
-  //$where = "`id` IN (" . implode(',', $requestedFeedIDs) . ")"; // TODO: Sanitise!
-//}
 $where = "`id` IN (" . $requestedFeeds . ")"; // TODO: Sanitise!
 
 
@@ -35,7 +32,7 @@ $feeds = $feeds['result'];
 
 // set up calendar
 
-$config = array("unique_id" => "gigx.co.uk",
+$config = array("unique_id" => "green-calendar.gigx.co.uk",
      "directory" => "import",
 );
 $vcalendar = new vcalendar($config);
@@ -53,15 +50,3 @@ $vcalendar->saveCalendar();
   header('Content-type: text/calendar; charset=utf-8');
   header('Content-Disposition: attachment; filename=' . $file);
   readfile($path.$file);
-
-
-
-//$vcalendar->setConfig("url" , "http://www.meetup.com/Transition-Cambridge/events/ical/");
-//$vcalendar->parse();
-
-//$vcalendar->setConfig("directory", "export");
-//$vcalendar->setConfig("filename", "icalmerge3.ics");
-//$vcalendar->saveCalendar();
-
-
-//echo "done";
