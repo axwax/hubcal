@@ -31,21 +31,27 @@ else {
   <meta name="viewport" content="width=device-width">
 <html>
 <head>
+<title>Cambridge Green Calendar</title>
+
 <meta charset='utf-8' />
 
 <meta property="og:locale" content="en_GB" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Cambridge Green Calendar" />
-<meta property="og:description" content="This currently shows events from PiNGS, Afrinspire, Centre for Global Equality, Cambridge Hub, Cambridge Carbon Footprint, Cambridge Sustainable Food City, Transition Cambridge" />
-<meta property="og:url" content="http://gigx.co.uk/green-calendar/" />
-<meta property="og:site_name" content="iCal Aggregator" />
-<meta property="og:image" content="http://gigx.co.uk/green-calendar/green-calendar.png" />
-
-
+<meta property="og:description" content="This currently shows events from PiNGS, Afrinspire, Centre for Global Equality, Cambridge Hub, Cambridge Carbon Footprint, Cambridge Sustainable Food City, Transition Cambridge, Cambridge Conservation Forum and Cambridge Conservation Volunteers" />
+<meta property="og:url" content="http://green-calendar.gigx.co.uk/" />
+<meta property="og:site_name" content="Cambridge Green Calendar" />
+<meta property="og:image" content="http://green-calendar.gigx.co.uk/images/green-calendar-2015-11-09.png" />
 
 <link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.css' rel='stylesheet' />
 <link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+
+<link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="http://green-calendar.gigx.co.uk/images/calendar-icon-180x180.png">
+<meta name="msapplication-TileImage" content="http://green-calendar.gigx.co.uk/images/calendar-icon-270x270.png">
+
 <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.js'></script>
