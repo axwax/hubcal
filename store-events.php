@@ -8,7 +8,7 @@ db_auth();
 //$sQuery = "TRUNCATE TABLE `events`";
 //$rResult = mysql_query($sQuery);
 
-$category = 3;
+$category = 1;
 $feeds = db_select('feeds', array('*'), array('category' => $category ));
 $feeds = $feeds['result'];
 
@@ -26,7 +26,7 @@ foreach ($feeds as $index => $feed){
     // grab and sanitise the fields
     $uid = $event['UID'];
     $title = tidy($event['SUMMARY']);
-  echo "&nbsp;&nbsp;fetching event <b>".$uid."</b> ".$title."<br/>";
+  //echo "&nbsp;&nbsp;fetching event <b>".$uid."</b> ".$title."<br/>";
 
     $body = tidy($event['DESCRIPTION']);
     
@@ -68,17 +68,19 @@ foreach ($feeds as $index => $feed){
     $result = db_insert('events', $aFields);
     if($result['error']){
       // the event already exists - only update if there has been a revision
+      //echo "<br/>EVENT EXISTS";
       if($sequence){
-        echo "<br/>UPDATING EVENT:";
-        print_r($sequence);
+        //echo "<br/>UPDATING EVENT:";
+        echo "&nbsp;&nbsp;updating event <b>".$uid."</b> ".$title."<br/>";
         db_update('events', $aFields, array('UID'=>$uid));
       }
+    }
+    else {
+      echo "&nbsp;&nbsp;adding event <b>".$uid."</b> ".$title."<br/>";        
     }
   }
   
 }
-
-
 
 function tidy($txt){
   $tidy = str_replace("\\n"," <br/>",$txt);
@@ -87,26 +89,3 @@ function tidy($txt){
   $tidy = str_replace("\\t","    ",$tidy);
   return $tidy;
 }
-//print_r($feedEvents);
-//echo "$feedcount feeds added";
-
-
-/*
-fields:
-
- UID
- DTSTART
- DTEND
- SUMMARY
- DESCRIPTION
- URL
-CREATED
- LAST-MODIFIED
- ORGANIZER (MAILTO:rebecca@r-j.co.uk)
- ORGANIZER_array array(array([CN] => Rebecca Jones), MAILTO:rebecca@r-j.co.uk)
-X-GS-GROUP-LOGO
- LOCATION
-CATEGORIES
-ATTACH
-STATUS (CONFIRMED)
-*/
