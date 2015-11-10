@@ -56,12 +56,8 @@ else {
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
-<!-- the code from the JavaScript tab will go here -->
 
-
-<!-- the code from the CSS tab will go here -->
-
-<style id="jsbin-css">
+<style>
   
 /* general */  
 body {
@@ -99,6 +95,7 @@ body {
     border-radius: 5px;
 }
 #settings .header {display: none; text-align: right; background-color: #ddd;}
+#settings h4{display: inline-block;}
 #feedList {display:inline;margin: 0;}
 #feedList li {
 	display:inline-block;
@@ -109,7 +106,6 @@ body {
 	box-shadow: 0;
 }
 #feedList li:hover {
-	/*border: 2px dotted #666;*/
 	cursor:pointer;
 	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset,
              0 0 2px rgba(255, 255, 255, 0.3) inset,
@@ -121,10 +117,15 @@ body {
 	border: 1px solid #666;
 }
 
+#menu-button {display: inline-block;}
+#settings {width: 100%; display: none;text-align:center;}
+#close-button {float:left;}
+
 .mobile #menu-button {display: inline-block;}
 .mobile #settings {width: 100%; display: none;}
 .mobile #settings .header {display: block;}
 .mobile #feedList li {display: block;}
+.mobile .fc-center {margin-top: 1em;}
 
 /* calendar */
 #calendar {
@@ -137,9 +138,12 @@ body {
 .btn a{color:#fff;}
 #progressModal{top:30%;}
 
-
-
-
+/* colour scheme */
+.btn-primary{background-color: #8dc63f; border-color: #75a434;}
+.btn-primary:hover, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
+    background-color: #7db038;
+    border-color: #304416;
+}
 </style>
 </head>
 <body>
