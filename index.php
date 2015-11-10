@@ -234,14 +234,13 @@ $(function() { // document ready
   if (typeof scrollTime === 'undefined' || !scrollTime) {
     scrollTime = '06:00:00';
   }
-
+  
   feeds = {};
   selectedFeeds = {};
   colours = ['Blue', 'BlueViolet', 'Brown', 'CadetBlue', 'Crimson', 'Coral', 'CornflowerBlue', 'ForestGreen', 'MidnightBlue', 'DarkBlue', 'DarkGreen', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'DarkOliveGreen', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
   $('#progressModal').modal('show');
   $.getJSON( "load-feeds.php", function( data ) {
     feeds = data;
-    //console.log(feeds);
 
     var feedListHTML = '';
     selectedFeeds = JSON.parse( localStorage.getItem( 'selectedFeeds' ) );
@@ -251,19 +250,16 @@ $(function() { // document ready
         selectedFeeds[feedID] = true;
       });
     }
-    //console.log(selectedFeeds);
     $.each(feeds, function(feedID, feed){
-      //selectedFeeds[feedID] = true;
       feeds[feedID]['colour'] = colours[feedID];
       feedListHTML += '<li class="disabled" id="'+feedID+'" style="background-color: '+colours[feedID]+'; color: white;">'+feed.name+'</li>'
     });
     $('#feedList').html(feedListHTML);
       $.each(selectedFeeds, function(feedID,selected){
       $('#'+feedID).removeClass('disabled');
-      //console.log('enabling '+feedID);
     });
 
-    
+    console.log(scrollTime);
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -283,14 +279,11 @@ $(function() { // document ready
           data: function() { // a function that returns an object
               var feedsToFetch = {};
               $.each(selectedFeeds, function(key, selected){
-                //console.log(key);
-                //console.log(feeds[key]);
                 if (typeof feeds[key] !== 'undefined') {
                   feedsToFetch[key] = feeds[key].colour;
                 }
                 
               });
-              //console.log(feedsToFetch);
               return {
                   feeds: feedsToFetch
               };
@@ -313,29 +306,16 @@ $(function() { // document ready
       windowResize: function(view) {
         // switch view depending on screen size
         if ($(window).width() < 514){
-          $('body').addClass('mobile');
-        
-            //$('#feedList').hide();
+          $('body').addClass('mobile');        
         } else {
-          $('body').removeClass('mobile');
-      
-            //$('#feedList').show();
+          $('body').removeClass('mobile');      
         }        
-        /*
-        if ($(window).width() < 514){
-            $('#feedList').hide();
-            $('#calendar').fullCalendar( 'changeView', 'basicDay' );
-        } else {
-            $('#feedList').show();
-            $('#calendar').fullCalendar( 'changeView', 'month' );
-        }
-        */
       },
       
       eventClick: function(event, jsEvent, view) {
           var start = moment(event.start).format("dddd, MMMM Do YYYY, h:mm a");
           var end = moment(event.end).format("dddd, MMMM Do YYYY, h:mm a");
-          console.log(event.eventSource);
+          console.log(event);
           var eventHeader = (event.location ? '<b>Venue: </b> '+event.location +'<br/>' : '')+'<b>Starts:</b> '+start+'<br/>'+'<b>Ends:</b> '+end+'<br/>'+'<b>Event Source:</b> '+event.eventSource +' <a href="'+event.eventSourceURL+'">[iCal Feed]</a><br/>';
               $('#modalTitle').html(event.title);
               if (typeof event.attachment !== 'undefined') {
@@ -349,10 +329,7 @@ $(function() { // document ready
               $('#modalBody').html(body);
               $('#eventUrl').attr('href',event.url);
               $('#fullCalModal').modal();
-  
-          // change the border color just for fun
-          //$(this).css('border-color', 'red');
-          return false;
+           return false;
       },
     });  
   });
