@@ -152,8 +152,10 @@ body {
       <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
     </button>
     <div id="settings">
-      <div class="header"><span class="close">x</span></div>
-      <b>Calendars:</b>
+      <button id ="close-button" type="button" class="btn btn-default">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </button>      
+      <h4>Calendars:</h4>
       <ul id="feedList"></ul>
     </div>
   </header>
@@ -373,12 +375,11 @@ $(function() { // document ready
 	});
 
   $(document).on('click','#menu-button', function(){
-    $('#settings').slideDown();
-    $('#menu-button').hide();
+    $('#menu-button').fadeOut('fast',function(){$('#settings').slideDown('fast');});
   });  
-  $('#settings').on('click','.close', function(){
-    $('#settings').slideUp();
-    $('#menu-button').show();
+  $('#settings').on('click','#close-button', function(){
+    $('#settings').slideUp('slow',function(){$('#menu-button').fadeIn('fast')});
+
   });
 
   
