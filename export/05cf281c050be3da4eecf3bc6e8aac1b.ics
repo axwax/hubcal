@@ -1,0 +1,91 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//gigx.co.uk//NONSGML kigkonsult.se iCalcreator 2.22//
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:AFRINSPIRE: Events
+BEGIN:VEVENT
+UID:1_20151018T045628Z_1012169@groupspaces.com
+DTSTAMP:20151105T175342Z
+CLASS:PUBLIC
+CREATED:20151018T045628Z
+DESCRIPTION:Save the date! We aim to have a gathering in the new community 
+ garden\, with local Gardening for Health garden volunteers - maybe have a 
+ tool collection point\, maybe do some tool sharpening. Not confirmed yet. 
+ We'd like to have a social walk around the park from 2pm too.
+DTSTART:20151206T130000Z
+DTEND:20151206T140000Z
+LAST-MODIFIED:20151018T045600Z
+LOCATION:Nightingale Community Garden
+ORGANIZER;CN=Rebecca Jones:MAILTO:rebecca@r-j.co.uk
+SUMMARY:Queen Edith's Winter Festival
+URL:http://groupspaces.com/PiNGS/item/1012169
+X-GS-WEEKOFYEARNUMBER:49
+X-GS-DAYOFWEEKNUMBER:1
+X-GS-EMBED:http://groupspaces.com/PiNGS/embed/item/1012169
+X-GS-GROUP-NAME:PiNGS
+X-GS-GROUP-LOGO:http://media.groupspaces.com/thumb/s/13246178/h/9ce814c819d
+ 4f6484dd2c17591b8861f.jpg
+X-GS-DATE-STRING:<span class='date'>Sunday\, 6th December 2015</span> at <s
+ pan class='time'>1pm</span> - <span class='time'>2pm</span>
+END:VEVENT
+BEGIN:VEVENT
+UID:1_20151102T115938Z_1016887@groupspaces.com
+DTSTAMP:20151105T175343Z
+CLASS:PUBLIC
+CREATED:20151102T115938Z
+DESCRIPTION:Afrinspire offers you a unique opportunity to enjoy a delectabl
+ e three course East African meal while raising funds for local projects in
+  East Africa
+DTSTART:20151113T190000Z
+DTEND:20151113T230000Z
+LAST-MODIFIED:20151102T115900Z
+LOCATION:Fitzwilliam College
+ORGANIZER;CN=Ian Sanderson:MAILTO:office@afrinspire.org.uk
+SUMMARY:Afrinspire East African Charity Formal
+URL:http://groupspaces.com/AFRINSPIRE/item/1016887
+X-GS-WEEKOFYEARNUMBER:46
+X-GS-DAYOFWEEKNUMBER:6
+X-GS-EMBED:http://groupspaces.com/AFRINSPIRE/embed/item/1016887
+X-GS-IMAGE-URL:http://media.groupspaces.com/thumb/s/13253877/h/d36180c8892b
+ 7229bd8adc73e411091e.jpg
+X-GS-IMAGE-TYPE:image/jpeg
+X-GS-GROUP-NAME:AFRINSPIRE
+X-GS-GROUP-LOGO:http://media.groupspaces.com/thumb/s/9309128/h/f352d625c936
+ b1215796ba63aeecfbb8.jpg
+X-GS-DATE-STRING:<span class='date'>Friday\, 13th November 2015</span> at <
+ span class='time'>7pm</span> - <span class='time'>11pm</span>
+END:VEVENT
+BEGIN:VEVENT
+UID:1_20150821T132813Z_998403@groupspaces.com
+DTSTAMP:20151105T175343Z
+CLASS:PUBLIC
+CREATED:20150821T132813Z
+DESCRIPTION:**Come and dance the night away at the Afrinspire Student Socie
+ ty's Charity Ceilidh with the Cambridge University Ceilidh Band!**   \n  
+ \n**There'll be a raffle\, crafts to buy and a free glass of wine with eve
+ ry ticket!**   \n  \n\n  * View image: *\n<http://files.groupspaces.com/AF
+ RINSPIRE/files/1492804/zWbc6e3p4tJSjYLdpl2N/c348c581008c7452819142627df22f
+ 3b.jpg?view&size=xsw>\n\n  \n**  \nAll profits will go t****o ****Afrins**
+ **pire\, re****gis****t****ere****d UK c****harity no. ****10****59001**
+DTSTART:20151106T193000Z
+DTEND:20151106T213000Z
+LAST-MODIFIED:20150821T132800Z
+LOCATION:Emmanuel United Reformed Church\, Trumpington Street\, Cambridge\,
+  CB2 1RR
+ORGANIZER;CN=Ian Sanderson:MAILTO:office@afrinspire.org.uk
+SUMMARY:Afrinspire Student Society Charity Ceilidh 
+URL:http://groupspaces.com/AFRINSPIRE/item/998403
+X-GS-WEEKOFYEARNUMBER:45
+X-GS-DAYOFWEEKNUMBER:6
+X-GS-EMBED:http://groupspaces.com/AFRINSPIRE/embed/item/998403
+X-GS-IMAGE-URL:http://media.groupspaces.com/thumb/s/12494105/h/e437f3ac8afb
+ 3f75591d27192a4fba32.jpg
+X-GS-IMAGE-TYPE:image/jpeg
+X-GS-GROUP-NAME:AFRINSPIRE
+X-GS-GROUP-LOGO:http://media.groupspaces.com/thumb/s/9309128/h/f352d625c936
+ b1215796ba63aeecfbb8.jpg
+X-GS-DATE-STRING:<span class='date'>Tomorrow\, 6th November 2015</span> at 
+ <span class='time'>7:30pm</span> - <span class='time'>9:30pm</span>
+END:VEVENT
+END:VCALENDAR
