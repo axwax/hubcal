@@ -1,13 +1,32 @@
+<?php
+if($_GET['date']){
+  $defaultDate = date("Y-m-d", strtotime($_GET['date']));
+  $scrollTime = date("H:i:s", strtotime($_GET['date']));
+}
+else{
+  $defaultDate = date("Y-m-d");
+  $scrollTime = date("H:i:s");
+}
+if($_GET['mintime']){
+  $minTime = date("H:i:s", strtotime("today " . $_GET['mintime']));
+}
+$defaultView = '';
+if($_GET['view']){
+  $views = array('month', 'basicWeek', 'basicDay', 'agendaWeek', 'agendaDay');
+  if(in_array($_GET['view'], $views, true)){
+    $defaultView = $_GET['view'];
+  }
+}
 
-<!DOCTYPE html>
-<!--
-Created using JS Bin
-http://jsbin.com
+if($_GET['height'] && is_numeric($_GET['height']) && $_GET['height']>200){
+  $calendarHeight = $_GET['height']-100;
+}
+else {
+  $calendarHeight = 'false';
+}
 
-Copyright (c) 2015 by anonymous (http://jsbin.com/yetidobaja/1/edit)
 
-Released under the MIT license: http://jsbin.mit-license.org
--->
+?><!DOCTYPE html>
 <meta name="robots" content="noindex">
   <meta name="viewport" content="width=device-width">
 <html>
@@ -168,7 +187,41 @@ body {
 
 <script id="jsbin-javascript">
 $(function() { // document ready
-  if ($(window).width() < 514) $('body').addClass('mobile');
+  
+  // default View & mobile/desktop buttons/styles
+  defaultView = '<?php echo $defaultView; ?>';
+  if (!defaultView && localStorage.getItem( 'defaultView' )) {
+    defaultView = localStorage.getItem( 'defaultView' );
+  }
+  if ($(window).width() < 514){
+    viewButtons = 'month,basicWeek,basicDay';
+    $('body').addClass('mobile');
+    if (!defaultView) {
+      defaultView = 'basicDay';
+    }
+  }
+  else{
+    viewButtons = 'month,agendaWeek,agendaDay';
+    if (!defaultView) {
+      defaultView = 'month';
+    }    
+  }
+
+  // height
+  calendarHeight = <?php echo $calendarHeight; ?>;
+  if (typeof calendarHeight === 'undefined' || !calendarHeight) {
+    calendarHeight = 'auto';
+  }
+  
+  // minTime and scrollTime
+  minTime = '<?php echo $minTime; ?>';
+  scrollTime = '<?php echo $scrollTime; ?>';
+  if (typeof minTime === 'undefined' || !minTime) {
+    minTime = '00:00:00';
+  }
+  if (typeof scrollTime === 'undefined' || !scrollTime) {
+    scrollTime = '06:00:00';
+  }
 
   feeds = {};
   selectedFeeds = {};
@@ -204,19 +257,16 @@ $(function() { // document ready
       header: {
         left: 'prev,next today',
         center: 'title',
-        right: 'month,agendaWeek,agendaDay'
+        right: viewButtons
       },
-      //defaultDate: '2010-01-01',
-      defaultView: ($(window).width() < 514 ? 'basicDay' : 'month'),
+      defaultView: defaultView,
       editable: true,
+      firstDay: 1,
+      defaultDate: "<?php echo $defaultDate; ?>",
       
       columnFormat: { month: 'ddd', week: 'ddd D/M', day: 'dddd D/M' },    
-      //minTime: '06:00:00',
-      //firstHour: 12,
-      //events: 'http://humcentre.gigx.co.uk/icaltest/icalfeed.php',
       events: {
           editable: false,
-          //url: 'icalfeed.php',
           url: 'load-events.php',
           type: 'POST',
           data: function() { // a function that returns an object
@@ -241,36 +291,13 @@ $(function() { // document ready
                 $('#progressModal').modal('hide');
           },       
       },
-      
-      //eventRender: function (event, element) {
-      //    element.find('.fc-title').html("ax"+event.title);
-      //},
-      //timeFormat: 'h(:mm)A' ,
+      height: calendarHeight,
+      minTime: minTime,
+      scrollTime: scrollTime,
       timeFormat: 'H:mm' ,
       axisFormat: 'HH:mm',
-      loading: function(bool) {
-        console.log('loading');
-        //if (bool) 
-          //$('#progressModal').modal('show');
-        //else 
-          //$('#loading').hide();
-      },
       viewRender: function( view, element ){
-        //var view = $('#calendar').fullCalendar('getView');
-        console.log('view change: '+view.type);
-        //console.log(view);
-        //console.log(element);
-        /*
-        // switch view depending on screen size
-        if ($(window).width() < 514){
-          if (view.type == 'agendaWeek') {
-            $('#calendar').fullCalendar( 'changeView', 'basicWeek' );
-          } else
-          if (view.type == 'agendaDay') {
-            $('#calendar').fullCalendar( 'changeView', 'basicDay' );
-          } 
-        }
-        */
+        localStorage.setItem( 'defaultView', view.type);
       },
       windowResize: function(view) {
         // switch view depending on screen size
