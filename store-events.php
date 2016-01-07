@@ -1,7 +1,11 @@
 <?php
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
 
-require 'class.iCalReader.php';
-require '../includes/db-functions.php';
+require __DIR__ .'/class.iCalReader.php';
+//require '../includes/db-functions.php';
+require __DIR__ .'/../includes/db-functions.php';
+
 db_auth();
 
 // delete all existing events
@@ -19,7 +23,7 @@ foreach ($feeds as $index => $feed){
   // fetch events for feed source
   $ical   = new ICal($feed['url']);
   $events = $ical->events();
-
+  if(!$events){continue;}
   // loop through all events for a feed source
   foreach ($events as $event) {
  
@@ -81,6 +85,7 @@ foreach ($feeds as $index => $feed){
   }
   
 }
+echo "<br/>finished storing events";
 
 function tidy($txt){
   $tidy = str_replace("\\n"," <br/>",$txt);
