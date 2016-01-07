@@ -47,8 +47,8 @@ if($start && $end){
 
 
 $events = db_select('events', array('*'), $where, array('start' => 'ASC'));
-$events = $events['result'];
 
+$events = $events['result'];
 foreach ($events as $event) {
 
   $eventObj = new stdClass();
@@ -60,7 +60,7 @@ foreach ($events as $event) {
   }
   $eventObj->title = $event['title'];
   $eventObj->body = $event['body'];
-  $eventObj->url = $event['URL'];
+  $eventObj->url = $event['url'];
   $eventObj->location = $event['location'];
   $eventObj->attachment = $event['attachment'];
   $eventObj->organizerName = $event['organizerName'];
