@@ -341,8 +341,8 @@ $(function() { // document ready
       eventClick: function(event, jsEvent, view) {
           var start = moment(event.start).format("dddd, MMMM Do YYYY, h:mm a");
           var end = moment(event.end).format("dddd, MMMM Do YYYY, h:mm a");
-          console.log(event);
-          var eventHeader = (event.location ? '<b>Venue: </b> '+event.location +'<br/>' : '')+'<b>Starts:</b> '+start+'<br/>'+'<b>Ends:</b> '+end+'<br/>'+'<b>Event Source:</b> '+event.eventSource +' <a href="'+event.eventSourceURL+'">[iCal Feed]</a><br/>';
+          console.log(event.end);
+          var eventHeader = (event.location ? '<b>Venue: </b> '+event.location +'<br/>' : '')+'<b>Starts:</b> '+start+'<br/>'+(event.end ? '<b>Ends:</b> '+end+'<br/>' : '')+'<b>Event Source:</b> '+event.eventSource +' <a href="'+event.eventSourceURL+'">[iCal Feed]</a><br/>';
               $('#modalTitle').html(event.title);
               if (typeof event.attachment !== 'undefined') {
                 eventHeader = '<img class="aligncenter responsive" src="' + event.attachment + '"/>' + eventHeader;
