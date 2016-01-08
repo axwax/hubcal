@@ -291,7 +291,33 @@ $(function() { // document ready
           error: function() {
               $('#modalBody').html('there was an error while fetching events!');
           },
-          success: function() {
+          success: function(events) {
+            var todaysEvents = [];
+            $.each(events,function(_i,event){
+              var now = moment();
+              var eventDate = moment(event.start);
+              var eventDiff = eventDate.diff(now,'seconds');
+              console.log(eventDiff);
+              //now.diff(moment(event.start));
+              if (eventDiff>-1) {
+                if (eventDiff<(86400*3)) {
+                  todaysEvents.push(event.title);
+                  console.log('today: '+event.title+' - '+event.start+' in '+eventDate.diff(now,'days')+' days');
+                  console.log('end:'+event.end);
+                }
+                else{
+                  
+                  console.log(event.title+' - '+event.start+' in '+eventDate.diff(now,'days')+' days');
+                  console.log('end:'+event.end);
+                }
+              }
+            });
+            var msg = '';
+            $.each(todaysEvents,function(_i,event){
+              msg+=event+", ";
+            });
+            //if(msg) spawnNotification(msg.replace(/,\s*$/, ""),'/images/calendar-icon-180x180.png',"Today's Events");
+
                 $('#progressModal').modal('hide');
           },       
       },
@@ -360,6 +386,39 @@ $(function() { // document ready
 
   
 });
+
+function spawnNotification(theBody,theIcon,theTitle) {
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+  else if (!('PushManager' in window)) {
+    alert("no push manager");
+  }
+  else if (!('serviceWorker' in navigator)) {
+    alert("no serviceWorker");
+  }   
+  // Let's check whether we've already got permission, or it's been denied, otherwise ask
+  else if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+    navigator.serviceWorker.register('/service-worker.js');
+    Notification.requestPermission(function (permission) {
+        if (Notification.permission !== permission) {
+          Notification.permission = permission;
+        }      
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        spawnNotification(theBody,theIcon,theTitle);
+      }
+    });
+  }  
+  
+  var options = {
+      body: theBody,
+      icon: theIcon
+  }
+  var n = new Notification(theTitle,options);
+  setTimeout(n.close.bind(n), 5000); 
+}
 </script>
 </body>
 </html>
