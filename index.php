@@ -342,7 +342,7 @@ $(function() { // document ready
           var start = moment(event.start).format("dddd, MMMM Do YYYY, h:mm a");
           var end = moment(event.end).format("dddd, MMMM Do YYYY, h:mm a");
           console.log(event.end);
-          var eventHeader = (event.location ? '<b>Venue: </b> '+event.location +'<br/>' : '')+'<b>Starts:</b> '+start+'<br/>'+(event.end ? '<b>Ends:</b> '+end+'<br/>' : '')+'<b>Event Source:</b> '+event.eventSource +' <a href="'+event.eventSourceURL+'">[iCal Feed]</a><br/>';
+          var eventHeader = (event.location ? '<b>Venue: </b> '+event.location +'<br/>' : '')+'<b>Starts:</b> '+start+'<br/>'+(event.end ? '<b>Ends:</b> '+end+'<br/>' : '')+'<b>Event Source:</b> <a href="'+event.eventSourceURL+'" target="_blank">' + event.eventSource + '</a> <a href="'+event.eventFeedURL+'">[iCal Feed]</a><br/>';
               $('#modalTitle').html(event.title);
               if (typeof event.attachment !== 'undefined') {
                 eventHeader = '<img class="aligncenter responsive" src="' + event.attachment + '"/>' + eventHeader;
