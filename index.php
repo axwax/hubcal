@@ -353,7 +353,14 @@ $(function() { // document ready
               }
               body = eventHeader+'<br/>'+event.body;
               $('#modalBody').html(body);
+              if (event.url) {
               $('#eventUrl').attr('href',event.url);
+                $('#eventUrl').parent().show();
+              }
+              else{
+                $('#eventUrl').parent().hide();
+              }
+              console.log('setting event url:'+event.url);
               $('#fullCalModal').modal();
            return false;
       },
