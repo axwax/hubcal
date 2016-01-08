@@ -68,7 +68,8 @@ foreach ($events as $event) {
   
   $eventObj->color = $requestedFeeds[$event['feedID']];
   $eventObj->eventSource = $theFeeds[$event['feedID']]['name'];
-  $eventObj->eventSourceURL = $theFeeds[$event['feedID']]['url'];
+  $eventObj->eventSourceURL = $theFeeds[$event['feedID']]['source_url'];
+  $eventObj->eventFeedURL = $theFeeds[$event['feedID']]['url'];
   
   $outArr[] = $eventObj;    
 }
