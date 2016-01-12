@@ -112,6 +112,7 @@ else {
 
 <script id="jsbin-javascript">
 $(function() { // document ready
+    
   
   // default View & mobile/desktop buttons/styles
   defaultView = '<?php echo $defaultView; ?>';
@@ -151,10 +152,12 @@ $(function() { // document ready
   feeds = {};
   selectedFeeds = {};
   colours = ['Blue', 'BlueViolet', 'Brown', 'CadetBlue', 'Crimson', 'Coral', 'CornflowerBlue', 'ForestGreen', 'MidnightBlue', 'DarkBlue', 'DarkGreen', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'DarkOliveGreen', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
+  
+  // load the feeds
   $('#progressModal').modal('show');
   $.getJSON( "load-feeds.php", function( data ) {
     feeds = data;
-
+    // if we don't have a list of selected feeds in local storage, select all feeds
     var feedListHTML = '';
     selectedFeeds = JSON.parse( localStorage.getItem( 'selectedFeeds' ) );
     if(typeof selectedFeeds === 'undefined' || selectedFeeds === null){
@@ -163,6 +166,7 @@ $(function() { // document ready
         selectedFeeds[feedID] = true;
       });
     }
+    // display list of feeds and enable all selected ones 
     $.each(feeds, function(feedID, feed){
       feeds[feedID]['colour'] = colours[feedID];
       feedListHTML += '<li class="disabled" id="'+feedID+'" style="background-color: '+colours[feedID]+'; color: white;">'+feed.name+'</li>'
@@ -172,7 +176,7 @@ $(function() { // document ready
       $('#'+feedID).removeClass('disabled');
     });
 
-    console.log(scrollTime);
+    //initialise the calendar
     $('#calendar').fullCalendar({
       header: {
         left: 'prev,next today',
@@ -205,6 +209,7 @@ $(function() { // document ready
               $('#modalBody').html('there was an error while fetching events!');
           },
           success: function(events) {
+            /* notification about today's events 
             var todaysEvents = [];
             $.each(events,function(_i,event){
               var now = moment();
@@ -229,7 +234,8 @@ $(function() { // document ready
             $.each(todaysEvents,function(_i,event){
               msg+=event+", ";
             });
-            //if(msg) spawnNotification(msg.replace(/,\s*$/, ""),'/images/calendar-icon-180x180.png',"Today's Events");
+            if(msg) spawnNotification(msg.replace(/,\s*$/, ""),'/images/calendar-icon-180x180.png',"Today's Events");
+            */
 
                 $('#progressModal').modal('hide');
           },       
@@ -267,7 +273,7 @@ $(function() { // document ready
               body = eventHeader+'<br/>'+event.body;
               $('#modalBody').html(body);
               if (event.url) {
-              $('#eventUrl').attr('href',event.url);
+                $('#eventUrl').attr('href',event.url);
                 $('#eventUrl').parent().show();
               }
               else{
@@ -307,6 +313,7 @@ $(function() { // document ready
   
 });
 
+/*
 function spawnNotification(theBody,theIcon,theTitle) {
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
@@ -339,6 +346,7 @@ function spawnNotification(theBody,theIcon,theTitle) {
   var n = new Notification(theTitle,options);
   setTimeout(n.close.bind(n), 5000); 
 }
+*/
 </script>
 </body>
 </html>
