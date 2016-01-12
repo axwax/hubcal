@@ -46,6 +46,7 @@ else {
 <link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.css' rel='stylesheet' />
 <link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="style.css" rel="stylesheet" />
 
 <link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-32x32.png" sizes="32x32" />
 <link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-192x192.png" sizes="192x192" />
@@ -57,94 +58,6 @@ else {
 <script src='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
 
-<style>
-  
-/* general */  
-body {
-  margin: 10px 10px 40px 10px;
-  padding: 0;
-  font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-  font-size: 14px;
-}
-.aligncenter{
-  clear: both;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-.responsive{
-  max-width: 100%;
-  height: auto;
-}
-
-
-/* settings button */
-#menu-button {
-  display: none;
-  margin-bottom: 10px;
-}
-
-
-/* settings / feeds */
-#settings {
-    background-color: #eee;
-    padding: 3px 5px;
-    width: auto;
-    margin: 0 auto 10px auto;
-    display: inline-block;
-    border-radius: 5px;
-}
-#settings .header {display: none; text-align: right; background-color: #ddd;}
-#settings h4{display: inline-block;}
-#feedList {display:inline;margin: 0;}
-#feedList li {
-	display:inline-block;
-	padding: 2px 5px;
-	border-radius: 5px;
-	margin: 5px 5px 5px 0;
-	border: 1px solid transparent;
-	box-shadow: 0;
-}
-#feedList li:hover {
-	cursor:pointer;
-	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset,
-             0 0 2px rgba(255, 255, 255, 0.3) inset,
-             0 1px 2px rgba(0, 0, 0, 0.29);
-}
-#feedList li.disabled{
-	background-color: transparent !important;
-	color: #666 !important;
-	border: 1px solid #666;
-}
-
-#menu-button {display: inline-block;}
-#settings {width: 100%; display: none;text-align:center;}
-#close-button {float:left;}
-
-.mobile #menu-button {display: inline-block;}
-.mobile #settings {width: 100%; display: none;}
-.mobile #settings .header {display: block;}
-.mobile #feedList li {display: block;}
-.mobile .fc-center {margin-top: 1em;}
-
-/* calendar */
-#calendar {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.fc-content:hover{cursor: pointer;}
-
-/* modals */
-.btn a{color:#fff;}
-#progressModal{top:30%;}
-
-/* colour scheme */
-.btn-primary{background-color: #8dc63f; border-color: #75a434;}
-.btn-primary:hover, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-    background-color: #7db038;
-    border-color: #304416;
-}
-</style>
 </head>
 <body>
   <header>
