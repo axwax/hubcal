@@ -5,21 +5,26 @@ require '../includes/db-functions.php';
 db_auth();
 
 // TODO: Sanitise!!!!
+$requestedCategories = $_POST['categories'];
 $requestedFeeds = $_POST['feeds'];
 $start = date("Y-m-d", strtotime($_POST['start'] . " -1 month"));
 $end = date("Y-m-d", strtotime($_POST['end'] . " +1 month"));
 
-$category=1;
+//$category=1;
 $where = '';
-if($requestedFeeds){
+
+if($requestedCategories){
+  $requestedCategoryIDs = array_keys($requestedCategories);
+  $where ="`category` IN (" . implode(',', $requestedCategoryIDs) . ")";
+}
+/*
+elseif($requestedFeeds){
   $requestedFeedIDs = array_keys($requestedFeeds);
   $where = "`id` IN (" . implode(',', $requestedFeedIDs) . ")"; // TODO: Sanitise!
 }
+*/
 else{
   die('[]');
-}
-if($category){
-  $where .=" AND `category` = '$category'";
 }
 
 
@@ -32,9 +37,12 @@ foreach($feeds as $feed){
 }
 $feedIDs = array_keys($theFeeds);
 
+
+/*
 if($requestedFeeds){
   $feedIDs = array_intersect($feedIDs, $requestedFeedIDs);
 }
+*/
 
 $where = '';
 if($start && $end){
@@ -42,6 +50,7 @@ if($start && $end){
 }
   $where .= " AND `feedID` IN (" . implode(',', $feedIDs) . ")";
 
+//print_r($where);die;
 
 
 
@@ -66,7 +75,8 @@ foreach ($events as $event) {
   $eventObj->organizerName = $event['organizerName'];
   $eventObj->organizerEmail = $event['organizerEmail'];
   
-  $eventObj->color = $requestedFeeds[$event['feedID']];
+  //$eventObj->color = $requestedFeeds[$event['feedID']];
+  $eventObj->color = $requestedCategories[$theFeeds[$event['feedID']]['category']];
   $eventObj->eventSource = $theFeeds[$event['feedID']]['name'];
   $eventObj->eventSourceURL = $theFeeds[$event['feedID']]['source_url'];
   $eventObj->eventFeedURL = $theFeeds[$event['feedID']]['url'];
