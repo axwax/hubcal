@@ -24,6 +24,7 @@ body {
 }
 
 
+
 /* settings / feeds */
 #settings {
     background-color: #eee;
@@ -57,9 +58,17 @@ body {
 }
 #feedList{display:none;}
 
+#settings #iCalURL input{width: 100%; max-width: 600px;}
+
+/* responsive stuff */
 #menu-button {display: inline-block;}
+#menu-button::after {content:' <- Click here to  choose categories'}
 #settings {width: 100%; display: none;text-align:center;}
 #close-button {float:left;}
+
+#buttonhelp{display: inline-block;}
+
+.mobile #buttonhelp{display: none;}
 
 .mobile #menu-button {display: inline-block;}
 .mobile #settings {width: 100%; display: none;}
@@ -84,3 +93,4 @@ body {
     background-color: #7db038;
     border-color: #304416;
 }
+
