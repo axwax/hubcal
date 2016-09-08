@@ -31,16 +31,16 @@ else {
   <meta name="viewport" content="width=device-width">
 <html>
 <head>
-<title>Cambridge Green Calendar</title>
+<title>HubCal</title>
 
 <meta charset='utf-8' />
 
 <meta property="og:locale" content="en_GB" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Cambridge Green Calendar" />
-<meta property="og:description" content="This currently shows events from PiNGS, Afrinspire, Centre for Global Equality, Cambridge Hub, Cambridge Carbon Footprint, Cambridge Sustainable Food City, Transition Cambridge, Cambridge Conservation Forum and Cambridge Conservation Volunteers" />
+<meta property="og:title" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
+<meta property="og:description" content="View and subscribe to a variety of events feeds from ethical, environmental and sustainability projects in Cambridge." />
 <meta property="og:url" content="http://green-calendar.gigx.co.uk/" />
-<meta property="og:site_name" content="Cambridge Green Calendar" />
+<meta property="og:site_name" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
 <meta property="og:image" content="http://green-calendar.gigx.co.uk/images/green-calendar-2015-11-09.png" />
 
 <link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.css' rel='stylesheet' />
@@ -64,6 +64,7 @@ else {
     <button id ="menu-button" type="button" class="btn btn-default">
       <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
     </button>
+    <!--<div id="buttonhelp">Click here to  choose categories</div>-->
     <div id="settings">
       <button id ="close-button" type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
@@ -73,6 +74,15 @@ else {
       <ul id="categoryList"></ul><br/>
       <!--<h4>Calendars:</h4>-->
       <ul id="feedList"></ul>
+      <div>Subscribe to selected categories: 
+      <a class="ical" target="_blank"><img width="16" src="/images/google-calendar-64x64.png"/> Add to Google Calendar/Other</a>
+      <a class="webcal" target="_blank"><img width="16" src="/images/ical-64x64.png"/> Add to Calendar App (Apple Calendar/Outlook/iPhone?)</a>
+      <div id='iCalURL' >
+        <input type="text"/>
+        <p>Copy the above URL (Windows: CTRL+C, OSX: Command+C) and paste it into any calendar app that takes iCal feeds.</p>
+      </div>
+      </div>
+              <sub>***It may take a while to import to your calendar - please bear with us, and re-import if it doesn't appear!***</sub>
     </div>
   </header>
 	<div id='calendar'></div>
@@ -115,7 +125,8 @@ else {
 
 <script id="jsbin-javascript">
 $(function() { // document ready
-    
+  
+  $('#settings #iCalURL').hide();
   
   // default View & mobile/desktop buttons/styles
   defaultView = '<?php echo $defaultView; ?>';
@@ -155,7 +166,7 @@ $(function() { // document ready
   feeds = {};
   selectedFeeds = {};
   selectedCategories = {};
-  colours = ['CadetBlue', 'DarkGreen', 'CornflowerBlue', 'Brown', 'Crimson', 'BlueViolet', 'Coral', 'CornflowerBlue', 'ForestGreen', 'MidnightBlue', 'DarkBlue', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'DarkOliveGreen', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
+  colours = ['', 'Crimson', 'DarkGreen', 'ForestGreen', 'DarkOliveGreen', 'DarkSeaGreen', 'CornflowerBlue', 'Brown', 'BlueViolet', 'Coral', 'CornflowerBlue', 'MidnightBlue', 'DarkBlue', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
   
   // load the feeds
   $('#progressModal').modal('show');
@@ -200,9 +211,11 @@ $(function() { // document ready
       categoryListHTML += '<li class="disabled" id="'+categoryID+'" style="background-color: '+colours[categoryID]+'; color: white;">'+category.name+'</li>'
     });
     $('#categoryList').html(categoryListHTML);
-      $.each(selectedCategories, function(categoryID,selected){
+    $.each(selectedCategories, function(categoryID,selected){
       $('#'+categoryID).removeClass('disabled');
-    });      
+    });
+    updateLinks(selectedCategories);
+
 
     //initialise the calendar
     $('#calendar').fullCalendar({
@@ -349,17 +362,22 @@ $(function() { // document ready
 			selectedCategories[categoryID] = true;
 		});
 		localStorage.setItem( 'selectedCategories', JSON.stringify(selectedCategories) );
+    updateLinks(selectedCategories);
+
+    
 		$('#calendar').fullCalendar('refetchEvents');
 	});
 
   
 
   $(document).on('click','#menu-button', function(){
+    $('#buttonhelp').fadeOut('fast');
     $('#menu-button').fadeOut('fast',function(){$('#settings').slideDown('fast');});
   });  
   $('#settings').on('click','#close-button', function(){
     $('#settings').slideUp('slow',function(){$('#menu-button').fadeIn('fast')});
-
+    $('#buttonhelp').fadeIn('fast');
+    $('#settings #iCalURL').slideUp('fast');
   });
 
   
@@ -387,10 +405,10 @@ function spawnNotification(theBody,theIcon,theTitle) {
       // If the user accepts, let's create a notification
       if (permission === "granted") {
         spawnNotification(theBody,theIcon,theTitle);
-      }
-    });
+}
+});
   }  
-  
+
   var options = {
       body: theBody,
       icon: theIcon
