@@ -4,17 +4,39 @@ require_once('iCalcreator/iCalcreator.php');
 require '../includes/db-functions.php';
 db_auth();
 
-$requestedFeeds = $_GET['feeds'];
-$requestedFeedsArray = explode(',',$requestedFeeds);
-foreach($requestedFeedsArray as $feedID){
-  if(!is_numeric($feedID)){
+// sanitize categories
+$requestedCategories = $_GET['categories'];
+$requestedCategoriesArray = explode(',',$requestedCategories);
+foreach($requestedCategoriesArray as $categoryID){
+  if(!is_numeric($categoryID)){
     die;
   }
 }
+$requestedCategories=implode(',',$requestedCategoriesArray);
 
+// get names for categories and construct name for our calendar
+$where ="`id` IN (" . $requestedCategories . ")";
+$categories = db_select('categories', array('*'), $where);
+$categories = $categories['result'];
+
+$catnamesArray = array();
+foreach($categories as $category){
+  $catnamesArray[] = $category['name'];
+}
+$catnames = implode(', ',$catnamesArray);
+$calendarName = "Hubcal" . ($catnames ? ": $catnames" : "");
+
+// get feeds for selected categories
+$where ="`category` IN (" . $requestedCategories . ")";
+$feeds = db_select('feeds', array('*'), $where);
+$feeds = $feeds['result'];
+$requestedFeedsArray = array();
+foreach($feeds as $feed){
+  $requestedFeedsArray[] = $feed['id'];
+}
 $requestedFeeds=implode(',',$requestedFeedsArray);
 
-$path = '/var/www/vhosts/green-calendar.gigx.co.uk/export/';
+$path = '/var/www/vhosts/gigx.co.uk/green-calendar.gigx.co.uk/export/';
 
 $file = hash('md5',$requestedFeeds).'.ics';
 
@@ -43,7 +65,10 @@ foreach($feeds as $feed){
   $vcalendar->setConfig("url" , $feed['url']);
   $vcalendar->parse();
 }
-//$vcalendar->returnCalendar();
+
+$calendarDescription = "HubCal - stay updated on upcoming ethical, environmental and sustainable activities in Cambridge!";
+$vcalendar->setProperty( "X-WR-CALNAME", $calendarName);
+$vcalendar->setProperty( "X-WR-CALDESC", $calendarDescription);
 $vcalendar->setConfig("directory", "export");
 $vcalendar->setConfig("filename", $file);
 $vcalendar->saveCalendar();
