@@ -1,19 +1,20 @@
 <?php
+
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
 
 require __DIR__ .'/class.iCalReader.php';
-//require '../includes/db-functions.php';
 require __DIR__ .'/../includes/db-functions.php';
 
 db_auth();
 
-// delete all existing events
-//$sQuery = "TRUNCATE TABLE `events`";
-//$rResult = mysql_query($sQuery);
+// to delete all existing events
+// $sQuery = "TRUNCATE TABLE `events`";
+// $rResult = mysql_query($sQuery);
+// die;
 
-$category = 1;
-$feeds = db_select('feeds', array('*'), array('category' => $category ));
+// load all feed sources from database
+$feeds = db_select('feeds', array('*'));
 $feeds = $feeds['result'];
 
 // loop through all feed sources
@@ -72,9 +73,7 @@ foreach ($feeds as $index => $feed){
     $result = db_insert('events', $aFields);
     if($result['error']){
       // the event already exists - only update if there has been a revision
-      //echo "<br/>EVENT EXISTS";
       if($sequence){
-        //echo "<br/>UPDATING EVENT:";
         echo "&nbsp;&nbsp;updating event <b>".$uid."</b> ".$title."<br/>";
         db_update('events', $aFields, array('UID'=>$uid));
       }
