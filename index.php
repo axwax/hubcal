@@ -67,8 +67,11 @@ else {
     <div id="settings">
       <button id ="close-button" type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-      </button>      
-      <h4>Calendars:</h4>
+      </button>
+
+      <h4>Categories:</h4>
+      <ul id="categoryList"></ul><br/>
+      <!--<h4>Calendars:</h4>-->
       <ul id="feedList"></ul>
     </div>
   </header>
@@ -151,14 +154,19 @@ $(function() { // document ready
   
   feeds = {};
   selectedFeeds = {};
-  colours = ['Blue', 'BlueViolet', 'Brown', 'CadetBlue', 'Crimson', 'Coral', 'CornflowerBlue', 'ForestGreen', 'MidnightBlue', 'DarkBlue', 'DarkGreen', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'DarkOliveGreen', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
+  selectedCategories = {};
+  colours = ['CadetBlue', 'DarkGreen', 'CornflowerBlue', 'Brown', 'Crimson', 'BlueViolet', 'Coral', 'CornflowerBlue', 'ForestGreen', 'MidnightBlue', 'DarkBlue', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'DarkOliveGreen', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSeaGreen', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LawnGreen', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumSpringGreen', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
   
   // load the feeds
   $('#progressModal').modal('show');
   $.getJSON( "load-feeds.php", function( data ) {
-    feeds = data;
+    feeds = data.feeds;
+    categories = data.categories;
     // if we don't have a list of selected feeds in local storage, select all feeds
     var feedListHTML = '';
+    var categoryListHTML = '';
+    
+    // select all feeds if there's no local storage yet
     selectedFeeds = JSON.parse( localStorage.getItem( 'selectedFeeds' ) );
     if(typeof selectedFeeds === 'undefined' || selectedFeeds === null){
       selectedFeeds= {};
@@ -166,6 +174,16 @@ $(function() { // document ready
         selectedFeeds[feedID] = true;
       });
     }
+    
+    // select all categories if there's no local storage yet
+    selectedCategories = JSON.parse( localStorage.getItem( 'selectedCategories' ) );
+    if(typeof selectedCategories === 'undefined' || selectedCategories === null){
+      selectedCategories= {};
+      $.each(categories, function(categoryID, category){
+        selectedCategories[categoryID] = true;
+      });
+    }
+    
     // display list of feeds and enable all selected ones 
     $.each(feeds, function(feedID, feed){
       feeds[feedID]['colour'] = colours[feedID];
@@ -175,6 +193,16 @@ $(function() { // document ready
       $.each(selectedFeeds, function(feedID,selected){
       $('#'+feedID).removeClass('disabled');
     });
+      
+    // display list of categories and enable all selected ones 
+    $.each(categories, function(categoryID, category){
+      categories[categoryID]['colour'] = colours[categoryID];
+      categoryListHTML += '<li class="disabled" id="'+categoryID+'" style="background-color: '+colours[categoryID]+'; color: white;">'+category.name+'</li>'
+    });
+    $('#categoryList').html(categoryListHTML);
+      $.each(selectedCategories, function(categoryID,selected){
+      $('#'+categoryID).removeClass('disabled');
+    });      
 
     //initialise the calendar
     $('#calendar').fullCalendar({
@@ -194,14 +222,21 @@ $(function() { // document ready
           url: 'load-events.php',
           type: 'POST',
           data: function() { // a function that returns an object
+              var categoriesToFetch = {};
+              $.each(selectedCategories, function(key, selected){
+                if (typeof categories[key] !== 'undefined') {
+                  categoriesToFetch[key] = categories[key].colour;
+                }
+              });
+              
               var feedsToFetch = {};
               $.each(selectedFeeds, function(key, selected){
                 if (typeof feeds[key] !== 'undefined') {
                   feedsToFetch[key] = feeds[key].colour;
-                }
-                
+                }               
               });
               return {
+                  categories: categoriesToFetch,
                   feeds: feedsToFetch
               };
           },
@@ -258,6 +293,7 @@ $(function() { // document ready
       },
       
       eventClick: function(event, jsEvent, view) {
+        console.log(event);
           var start = moment(event.start).format("dddd, MMMM Do YYYY, h:mm a");
           var end = moment(event.end).format("dddd, MMMM Do YYYY, h:mm a");
           console.log(event.end);
@@ -267,7 +303,7 @@ $(function() { // document ready
                 eventHeader = '<img class="aligncenter responsive" src="' + event.attachment + '"/>' + eventHeader;
               }
               if (typeof event.organizerEmail !== 'undefined' && typeof event.organizerName !== 'undefined' && event.organizerEmail&& event.organizerName) {
-                console.log(event);
+                
                 eventHeader += '<b>Contact Organiser:</b> <a href="mailto:'+event.organizerEmail+'">'+event.organizerName+'</a><br/>';
               }
               body = eventHeader+'<br/>'+event.body;
@@ -288,7 +324,7 @@ $(function() { // document ready
   
 
 	
-
+  // click handler for feedList
   $('#feedList').on('click','li',function(event){
 		$(this).toggleClass("disabled");
 
@@ -301,6 +337,22 @@ $(function() { // document ready
 		localStorage.setItem( 'selectedFeeds', JSON.stringify(selectedFeeds) );
 		$('#calendar').fullCalendar('refetchEvents');
 	});
+  
+  // click handler for categoryList
+  $('#categoryList').on('click','li',function(event){
+		$(this).toggleClass("disabled");
+
+		selectedCategories = {};
+		$('#categoryList li:not(.disabled)').each(function(index, element){
+			var categoryID = $(element).attr('id');
+			console.log(categoryID);
+			selectedCategories[categoryID] = true;
+		});
+		localStorage.setItem( 'selectedCategories', JSON.stringify(selectedCategories) );
+		$('#calendar').fullCalendar('refetchEvents');
+	});
+
+  
 
   $(document).on('click','#menu-button', function(){
     $('#menu-button').fadeOut('fast',function(){$('#settings').slideDown('fast');});
