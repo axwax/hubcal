@@ -1,12 +1,18 @@
 <?php
 
-//error_reporting(-1);
-//ini_set('display_errors', 'On');
+/**
+ * fetches events for all feed sources (from feeds table),
+ * parses and sanitises them and stores them in the events table
+**/
 
-require __DIR__ .'/class.iCalReader.php';
-require __DIR__ .'/../includes/db-functions.php';
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
-db_auth();
+require_once('class.iCalReader.php');
+require_once('includes/hubconfig.php');
+require_once('includes/db-functions.php');
+db_auth($db,$user,$pw);
 
 // to delete all existing events
 // $sQuery = "TRUNCATE TABLE `events`";
