@@ -22,7 +22,6 @@ db_auth($db,$user,$pw);
 
 // TODO: Sanitise!!!!
 $requestedCategories = $_POST['categories'];
-$requestedFeeds = $_POST['feeds'];
 $start = date("Y-m-d", strtotime($_POST['start'] . " -1 month"));
 $end = date("Y-m-d", strtotime($_POST['end'] . " +1 month"));
 
