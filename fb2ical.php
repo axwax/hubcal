@@ -1,5 +1,11 @@
 <?php
 
+// this allows to convert public events for a facebook page to iCal
+// it requires a facebook app from https://developers.facebook.com/apps,
+// which needs to have the domain hosting hubcal added to settings|basic|app domains
+// add your access token to includes/hubconfig.php
+
+
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);

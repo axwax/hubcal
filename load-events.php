@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * fetches events for the requested date +/- 1 month
+ * arguments:
+ * categories
+ * start
+ * end
+ *
+ * returns:
+ * JSON-formatted list of events objects
+**/
+
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
