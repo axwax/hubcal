@@ -2,9 +2,20 @@
 
 // fill in the below variables and rename the file to hubconfig.php
 
+// database details
 $db = "";                                 // database name
 $user = "";                               // database username
 $pw = "";                                 // database password
-$root_path = "/var/www/example/hubcal/";  // full local path to hubcal, with trailing slash
-$ical_id = "hubcal.example.org";          // unique id for iCal feed- can be anything, but should contain your domain name
 
+// file system
+$root_path = "/var/www/example/hubcal/";  // full local path to hubcal, with trailing slash
+
+// these are used for iCal creation (ie by fb2ical and by merge-feeds)
+$ical_id = "hubcal.cambridgehub.org";          // unique id for iCal feed- can be anything, but should contain your domain name
+$timezone = "Europe/London";
+
+// facebook app details
+$facebook_app_id = "187948597266";
+$facebook_app_secret = "cd7f1cd7429fd243383d959c5d9ddf3a";
+// alternatively, you could generate an app token through facebook and then put it in the variable below
+$facebook_app_token = "";
