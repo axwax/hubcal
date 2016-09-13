@@ -1,13 +1,18 @@
 <?php
 
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 require_once('iCalcreator/iCalcreator.php');
+require_once('includes/hubconfig.php');
 
 $fb_id = $_GET['id'];
 $is_group = $_GET['group'];
-$path = '/var/www/vhosts/gigx.co.uk/green-calendar.gigx.co.uk/export/';
+$path = $root_path . 'export/';
 $file = hash('md5',$fb_id).'.ics';
-$tz     = "Europe/London"; // define time zone
-$uid = "green-calendar.gigx.co.uk"; // set a (site) unique id
+$tz     = $timezone; // define time zone
+$uid = $ical_id; // set a (site) unique id
 $config = array( "unique_id" => $uid
                , "TZID"      => $tz );
                
@@ -22,12 +27,12 @@ if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
 
 // get facebook events for group or page
 if($is_group) {
-  $access_token = "CAACEdEose0cBACi97Nj4X9chYT1N0Rrr1zwhmyDZBTZChuXPMqJCmd8pUnA6zaqeFH0RCWL1NfiNzHFig2GuHCpYYUPxrvvBZAX9BZASVF1pZAYlCFCLcLVxyUzwYhNHhz1EejEodFI8kecqlCjkszD4JxwGvwiSPTGSKKaOeQpZAtyRZCgtNZA3ipnuW1KmEH2Ar4TlnsFVZCW8cQWH4dxjM";
+  $access_token = "";  // TODO: find out how to generate one of these - you can get a temporary one through graph explorer: https://developers.facebook.com/tools/explorer
   $outArr = get_graph($fb_id."/events/");
   $events = $outArr['data'];
 }
 else {
-  $access_token = "187948597266|77843cfacc8f952ea5f00fcd802182ba";
+  $access_token = "$facebook_app_id|$facebook_app_secret";
   $outArr = get_graph($fb_id,'events');
   $events = $outArr['events']['data'];
 }
