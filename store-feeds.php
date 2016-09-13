@@ -1,8 +1,13 @@
 <?php
 
-require 'class.iCalReader.php';
-require '../includes/db-functions.php';
-db_auth();
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+require_once('class.iCalReader.php');
+require_once('includes/hubconfig.php');
+require_once('includes/db-functions.php');
+db_auth($db,$user,$pw);
 
 $feedURLs = array();
 //$feedURLs['Cambridge Conservation Forum'] = 'http:/://www.cambridgeconservationforum.org.uk/calendar/ical/2015-11/calendar.ics';

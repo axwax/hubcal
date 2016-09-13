@@ -1,8 +1,13 @@
 <?php
 
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
 require_once('iCalcreator/iCalcreator.php');
-require '../includes/db-functions.php';
-db_auth();
+require_once('includes/hubconfig.php');
+require_once('includes/db-functions.php');
+db_auth($db,$user,$pw);
 
 // sanitize categories
 $requestedCategories = $_GET['categories'];
@@ -36,7 +41,7 @@ foreach($feeds as $feed){
 }
 $requestedFeeds=implode(',',$requestedFeedsArray);
 
-$path = '/var/www/vhosts/gigx.co.uk/green-calendar.gigx.co.uk/export/';
+$path = $root_path . 'export/';
 
 $file = hash('md5',$requestedFeeds).'.ics';
 
@@ -54,7 +59,7 @@ $feeds = $feeds['result'];
 
 // set up calendar
 
-$config = array("unique_id" => "green-calendar.gigx.co.uk",
+$config = array("unique_id" => $ical_id,
      "directory" => "import",
 );
 $vcalendar = new vcalendar($config);

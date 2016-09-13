@@ -1,7 +1,12 @@
-<?
-require 'class.iCalReader.php';
-require '../includes/db-functions.php';
-db_auth();
+<?php
+
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+require_once('includes/hubconfig.php');
+require_once('includes/db-functions.php');
+db_auth($db,$user,$pw);
 
 $categories = db_select('categories', array('*'));
 $categories = $categories['result'];
