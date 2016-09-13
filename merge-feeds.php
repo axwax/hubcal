@@ -58,9 +58,10 @@ $feeds = db_select('feeds', array('*'), $where);
 $feeds = $feeds['result'];
 
 // set up calendar
-
+// the variables are stored in hubconfig
 $config = array("unique_id" => $ical_id,
      "directory" => "import",
+     "TZID"      => $timezone
 );
 $vcalendar = new vcalendar($config);
 
