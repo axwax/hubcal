@@ -1,10 +1,14 @@
 # Installation
 ## Set up Cron Job for events import:
-* 'crontab -e'
+* `crontab -e`
 * add a call to the store-events.php script, for example:
-..`00 01 * * * /usr/bin/php /var/www/yourhost.com/httpdocs/store-events.php`
-.. this executes the script every day at 1am
-.. you may also have to adjust the path to php
+
+...`00 01 * * * /usr/bin/php /var/www/yourhost.com/httpdocs/store-events.php`
+
+...this executes the script every day at 1am
+
+...you may also have to adjust the path to php
+
 * `:wq` to save and exit (or `:q!` to quit without saving)
 
 # Used Libraries:
