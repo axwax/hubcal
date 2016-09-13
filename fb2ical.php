@@ -11,10 +11,10 @@ $fb_id = $_GET['id'];
 $is_group = $_GET['group'];
 $path = $root_path . 'export/';
 $file = hash('md5',$fb_id).'.ics';
-$tz     = $timezone; // define time zone
-$uid = $ical_id; // set a (site) unique id
-$config = array( "unique_id" => $uid
-               , "TZID"      => $tz );
+
+// these are stored in hubconfig:
+$config = array( "unique_id" => $ical_id
+               , "TZID"      => $timezone );
                
 // load the cached version?
 if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
@@ -24,7 +24,6 @@ if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
   die;
 }
 
-
 // get facebook events for group or page
 if($is_group) {
   $access_token = "";  // TODO: find out how to generate one of these - you can get a temporary one through graph explorer: https://developers.facebook.com/tools/explorer
@@ -32,7 +31,8 @@ if($is_group) {
   $events = $outArr['data'];
 }
 else {
-  $access_token = "$facebook_app_id|$facebook_app_secret";
+  // either use access token, or construct one from app_id/secret
+  $access_token = ($access_token ? $access_token : "$facebook_app_id|$facebook_app_secret");
   $outArr = get_graph($fb_id,'events');
   $events = $outArr['events']['data'];
 }
