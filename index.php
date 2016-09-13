@@ -170,7 +170,7 @@ $(function() { // document ready
   
   // load the feeds
   $('#progressModal').modal('show');
-  $.getJSON( "load-feeds.php", function( data ) {
+  $.getJSON( "load-categories.php", function( data ) {
     feeds = data.feeds;
     categories = data.categories;
     // if we don't have a list of selected feeds in local storage, select all feeds
