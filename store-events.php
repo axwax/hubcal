@@ -9,6 +9,8 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
+set_time_limit(100); // try to increase the PHP time limit to 100s
+
 require_once('class.iCalReader.php');
 require_once('includes/hubconfig.php');
 require_once('includes/db-functions.php');
