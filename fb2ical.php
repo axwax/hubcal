@@ -34,12 +34,14 @@ if(file_exists($path.$file) && (time() - filemtime($path.$file) <3600)){
 if($is_group) {
   $access_token = "";  // TODO: find out how to generate one of these - you can get a temporary one through graph explorer: https://developers.facebook.com/tools/explorer
   $outArr = get_graph($fb_id."/events/");
+  if(empty($outArr['data'])) die("no data received - please check your facebook acess token and settings");
   $events = $outArr['data'];
 }
 else {
   // either use access token, or construct one from app_id/secret
   $access_token = ($access_token ? $access_token : "$facebook_app_id|$facebook_app_secret");
   $outArr = get_graph($fb_id,'events');
+  if(empty($outArr['events']['data'])) die("no data received - please check your facebook acess token and settings");
   $events = $outArr['events']['data'];
 }
 
@@ -81,12 +83,12 @@ $out = '';
 foreach($sortedEvents as $event){
   $title = $event['name'];
   $start = $event['start_time'];
-  $end = $event['end_time'];
+  $end = (!empty($event['end_time']) ? $event['end_time'] : false);
   $id = $event['id'];
-  $location = $event['location'];
+  $location = (!empty($event['location']) ? $event['location'] : false);
   $detailsArr = get_graph($id,'cover,description');
   $description = $detailsArr['description'];  
-  $image = $detailsArr['cover']['source'];
+  $image = (!empty($detailsArr['cover']['source']) ? $detailsArr['cover']['source'] : false);
   $url = "https://www.facebook.com/events/$id/";
   
   // new iCal Event:  
