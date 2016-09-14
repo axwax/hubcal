@@ -89,7 +89,7 @@ class ICal
      */
     public function initLines($lines)
     {
-        if (stristr($lines[0], 'BEGIN:VCALENDAR') === false) {
+        if (empty($lines) || stristr($lines[0], 'BEGIN:VCALENDAR') === false) {
             return false;
         } else {
             foreach ($lines as $line) {
@@ -323,9 +323,9 @@ class ICal
     public function process_recurrences()
     {
         $array = $this->cal;
-        $events = $array['VEVENT'];
-        if (empty($events))
+        if (empty($array['VEVENT']))
             return false;
+        $events = $array['VEVENT'];
         foreach ($array['VEVENT'] as $anEvent) {
             if (isset($anEvent['RRULE']) && $anEvent['RRULE'] != '') {
                 // Recurring event, parse RRULE and add appropriate duplicate events
@@ -596,6 +596,7 @@ class ICal
     public function events()
     {
         $array = $this->cal;
+        if(empty($array['VEVENT'])) return;
         return $array['VEVENT'];
     }
 
