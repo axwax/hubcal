@@ -93,6 +93,8 @@ foreach ($feeds as $index => $feed){
   
 }
 echo "<br/>finished storing events";
+$executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
+echo "<br/>This script took $executionTime to execute.";
 
 function tidy($txt){
   $tidy = str_replace("\\n"," <br/>",$txt);
