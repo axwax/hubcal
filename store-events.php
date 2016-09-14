@@ -52,17 +52,18 @@ foreach ($feeds as $index => $feed){
     // turn email address into links
     $mail_pattern = "/([A-z0-9\._-]+\@[A-z0-9_-]+\.)([A-z0-9\_\-\.]{1,}[A-z])/";
     $body = preg_replace($mail_pattern, '<a href="mailto:$1$2">$1$2</a>', $body);
-
     
+    if(empty($event['DTSTART'])) continue;
     $start = date(DATE_ISO8601, $ical->iCalDateToUnixTimestamp($event['DTSTART']));
-    $end = date(DATE_ISO8601, $ical->iCalDateToUnixTimestamp($event['DTEND']));
-    $url = $event['URL'];
-    $location = tidy($event['LOCATION']);
-    $modified = $event['LAST-MODIFIED'];
-    $organizerName = $event['ORGANIZER_array'][0]['CN'];
-    $organizerEmail = substr($event['ORGANIZER_array'][1],7); // remove MAILTO:
-    $attachment = $event['ATTACH'];
-    $sequence = $event['SEQUENCE'];
+    $end = (!empty($event['DTEND']) ? date(DATE_ISO8601, $ical->iCalDateToUnixTimestamp($event['DTEND'])) : false);
+
+    $url = (!empty($event['URL']) ? $event['URL'] : false);
+    $location = (!empty($event['LOCATION']) ? tidy($event['LOCATION']) : false);
+    $modified = (!empty($event['LAST-MODIFIED']) ? $event['LAST-MODIFIED'] : false);
+    $organizerName = (!empty($event['ORGANIZER_array'][0]['CN']) ? $event['ORGANIZER_array'][0]['CN'] : false);
+    $organizerEmail = (!empty($event['ORGANIZER_array'][1]) ? substr($event['ORGANIZER_array'][1],7) : false); // remove MAILTO:
+    $attachment = (!empty($event['ATTACH']) ? $event['ATTACH'] : false);
+    $sequence = (!empty($event['SEQUENCE']) ? $event['SEQUENCE'] : false);
 
     $aFields = array(
                       'feedID' =>$feed['id'],
@@ -79,7 +80,7 @@ foreach ($feeds as $index => $feed){
                       'attachment' => $attachment
                      ); 
     $result = db_insert('events', $aFields);
-    if($result['error']){
+    if(!empty($result['error'])){
       // the event already exists - only update if there has been a revision
       if($sequence){
         echo "&nbsp;&nbsp;updating event <b>".$uid."</b> ".$title."<br/>";
