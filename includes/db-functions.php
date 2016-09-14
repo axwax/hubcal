@@ -12,6 +12,7 @@
  */
 function db_auth($database, $user, $password) {
   mysql_connect("localhost", $user, $password) or die ( "Unable to connect to database");
+  mysql_set_charset('utf8'); // force utf-8, as some old entries (jan-april 2016) weren't encoded properly, causing json_encode to fail
   @mysql_select_db($database) or die( "Unable to select database");
 }
 
