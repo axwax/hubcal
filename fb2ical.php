@@ -105,12 +105,13 @@ foreach($sortedEvents as $event){
 }
 
 // save & output the iCal file
-$v->setConfig("directory", "export");
+if( FALSE === $v->setConfig( array( 'directory' => "export" ))) die( "directory $path must exist and be writeable" );
+if( FALSE === $v->setConfig( array( 'filename' => $file ))) die( "Temporary file $path$file could not be created" );
 $v->setConfig("filename", $file);
 $v->saveCalendar();
   header('Content-type: text/calendar; charset=utf-8');
   header('Content-Disposition: attachment; filename=' . $file);
-  readfile($path.$file);  
+  readfile($path.$file) or die("can't read".$path.$file);
 
 
 // get graph object/fields via curl
