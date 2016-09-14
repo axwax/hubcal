@@ -1,4 +1,8 @@
 <?php
+
+/* The main calendar page
+**/
+
 if($_GET['date']){
   $defaultDate = date("Y-m-d", strtotime($_GET['date']));
   $scrollTime = date("H:i:s", strtotime($_GET['date']));
@@ -43,8 +47,8 @@ else {
 <meta property="og:site_name" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
 <meta property="og:image" content="http://green-calendar.gigx.co.uk/images/green-calendar-2015-11-09.png" />
 
-<link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.css' rel='stylesheet' />
-<link href='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.print.css' rel='stylesheet' media='print' />
+<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.css' rel='stylesheet' />
+<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 
@@ -55,7 +59,8 @@ else {
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='http://fullcalendar.io/js/fullcalendar-2.4.0/fullcalendar.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/locale/en-gb.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
 
 </head>
@@ -134,14 +139,14 @@ $(function() { // document ready
     defaultView = localStorage.getItem( 'defaultView' );
   }
   if ($(window).width() < 514){
-    viewButtons = 'month,basicWeek,basicDay';
+    viewButtons = 'month,basicWeek,basicDay'; // could replace basicDay with list 
     $('body').addClass('mobile');
     if (!defaultView) {
       defaultView = 'basicDay';
     }
   }
   else{
-    viewButtons = 'month,agendaWeek,agendaDay';
+    viewButtons = 'month,agendaWeek,agendaDay'; // could add listMonth
     if (!defaultView) {
       defaultView = 'month';
     }    
@@ -228,8 +233,6 @@ $(function() { // document ready
       editable: true,
       firstDay: 1,
       defaultDate: "<?php echo $defaultDate; ?>",
-      
-      columnFormat: { month: 'ddd', week: 'ddd D/M', day: 'dddd D/M' },    
       events: {
           editable: false,
           url: 'load-events.php',
@@ -261,10 +264,12 @@ $(function() { // document ready
           },       
       },
       height: calendarHeight,
+			locale: 'en-gb',
       minTime: minTime,
+			navLinks: true,
       scrollTime: scrollTime,
       timeFormat: 'H:mm' ,
-      axisFormat: 'HH:mm',
+      slotLabelFormat: 'H:mm',
       viewRender: function( view, element ){
         localStorage.setItem( 'defaultView', view.type);
       },
@@ -306,8 +311,6 @@ $(function() { // document ready
       },
     });  
   });
-  
-
 	
   // click handler for feedList
   $('#feedList').on('click','li',function(event){
