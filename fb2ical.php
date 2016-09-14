@@ -68,11 +68,11 @@ $v->setProperty( "x-WR-CALNAME", $calendarName );
   // required of some calendar software
 $v->setProperty( "X-WR-CALDESC", $calendarDesc );
   // required of some calendar software
-$v->setProperty( "X-WR-TIMEZONE", $tz );
+$v->setProperty( "X-WR-TIMEZONE", $timezone );
   // required of some calendar software
-$xprops = array( "X-LIC-LOCATION" => $tz );
+$xprops = array( "X-LIC-LOCATION" => $timezone );
   // required of some calendar software
-iCalUtilityFunctions::createTimezone( $v, $tz, $xprops );
+iCalUtilityFunctions::createTimezone( $v, $timezone, $xprops );
   // create timezone component(-s) opt. 1
   // based on present date
 
@@ -96,10 +96,10 @@ foreach($sortedEvents as $event){
   $vevent->setProperty( "LOCATION", $location );
   $vevent->setProperty( "summary", $title );
   $vevent->setProperty( "description", $description );
-  $vevent->setProperty( "comment", $comment );
+  if(!empty($comment)) $vevent->setProperty( "comment", $comment );
   $vevent->setProperty( "ATTACH" , $image );
   $vevent->setProperty( "URL" , $url );
-  $vevent->setProperty( "UID" , $start."-".$id."@".$uid);
+  $vevent->setProperty( "UID" , $start."-".$id."@".$ical_id);
 }
 
 // save & output the iCal file
