@@ -3,6 +3,8 @@
 /* The main calendar page
 **/
 
+$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+
 if($_GET['date']){
   $defaultDate = date("Y-m-d", strtotime($_GET['date']));
   $scrollTime = date("H:i:s", strtotime($_GET['date']));
@@ -43,19 +45,19 @@ else {
 <meta property="og:type" content="website" />
 <meta property="og:title" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
 <meta property="og:description" content="View and subscribe to a variety of events feeds from ethical, environmental and sustainability projects in Cambridge." />
-<meta property="og:url" content="http://green-calendar.gigx.co.uk/" />
+<meta property="og:url" content="<?php echo $root; ?>" />
 <meta property="og:site_name" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
-<meta property="og:image" content="http://green-calendar.gigx.co.uk/images/green-calendar-2015-11-09.png" />
+<meta property="og:image" content="<?php echo $root; ?>images/green-calendar-2015-11-09.png" />
 
 <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.css' rel='stylesheet' />
 <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 
-<link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-32x32.png" sizes="32x32" />
-<link rel="icon" href="http://green-calendar.gigx.co.uk/images/calendar-icon-192x192.png" sizes="192x192" />
-<link rel="apple-touch-icon-precomposed" href="http://green-calendar.gigx.co.uk/images/calendar-icon-180x180.png">
-<meta name="msapplication-TileImage" content="http://green-calendar.gigx.co.uk/images/calendar-icon-270x270.png">
+<link rel="icon" href="<?php echo $root; ?>images/calendar-icon-32x32.png" sizes="32x32" />
+<link rel="icon" href="<?php echo $root; ?>images/calendar-icon-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="<?php echo $root; ?>images/calendar-icon-180x180.png">
+<meta name="msapplication-TileImage" content="<?php echo $root; ?>images/calendar-icon-270x270.png">
 
 <script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
