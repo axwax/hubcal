@@ -314,10 +314,6 @@ $(function() { // document ready
       },
     });
 		// replace buttons with icons
-		//$(".fc-month-button").html('<img src="images/month.png" width="20" height="20" title="month" alt="month"/>');
-		//$(".fc-agendaWeek-button,.fc-basicWeek-button").html('<img src="images/week.png" width="20" height="20" title="week" alt="week"/>');
-		//$(".fc-agendaDay-button,.fc-basicDay-button,.fc-list-button").html('<img src="images/day.png" width="20" height="20" title="day" alt="day"/>');
-		//$(".fc-listMonth-button").html('<img src="images/list.png" width="20" height="20" title="list" alt="list"/>');
 		$(".fc-month-button").html('<i class="icon icon-month"></i>');
 		$(".fc-agendaWeek-button,.fc-basicWeek-button").html('<i class="icon icon-week"></i>');
 		$(".fc-agendaDay-button,.fc-basicDay-button,.fc-list-button").html('<i class="icon icon-day"></i>');
