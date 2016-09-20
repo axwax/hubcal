@@ -59,7 +59,8 @@ else {
 <link rel="apple-touch-icon-precomposed" href="<?php echo $root; ?>images/calendar-icon-180x180.png">
 <meta name="msapplication-TileImage" content="<?php echo $root; ?>images/calendar-icon-270x270.png">
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/locale/en-gb.js'></script>
 <script src="https://code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/locale/en-gb.js'></script>
