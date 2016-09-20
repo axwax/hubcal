@@ -142,14 +142,14 @@ $(function() { // document ready
     defaultView = localStorage.getItem( 'defaultView' );
   }
   if ($(window).width() < 514){
-    viewButtons = 'month,basicWeek,basicDay'; // could replace basicDay with list 
+    viewButtons = 'month,basicWeek,list,listMonth'; // could replace basicDay with list 
     $('body').addClass('mobile');
     if (!defaultView) {
       defaultView = 'basicDay';
     }
   }
   else{
-    viewButtons = 'month,agendaWeek,agendaDay'; // could add listMonth
+    viewButtons = 'month,agendaWeek,agendaDay,listMonth'; // could add listMonth
     if (!defaultView) {
       defaultView = 'month';
     }    
