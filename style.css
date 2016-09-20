@@ -1,3 +1,72 @@
+/* fonts */
+@charset "UTF-8";
+
+@font-face {
+  font-family: "hubcal";
+  src:url("fonts/hubcal.eot");
+  src:url("fonts/hubcal.eot?#iefix") format("embedded-opentype"),
+    url("fonts/hubcal.woff") format("woff"),
+    url("fonts/hubcal.ttf") format("truetype"),
+    url("fonts/hubcal.svg#hubcal") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "hubcal" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-month:before {
+  content: "\61";
+}
+.icon-week:before {
+  content: "\62";
+}
+.icon-day:before {
+  content: "\63";
+}
+.icon-list:before {
+  content: "\64";
+}
+.icon-google-calendar:before {
+  content: "\65";
+}
+.icon-calendar:before {
+  content: "\66";
+}
+
+.icon:before{
+  font-size: 1.22em;
+  vertical-align: middle;
+  color: #75a434;
+}
+.icon:hover:before{
+  color: #66912f;  
+}
+.fc-state-active .icon:before{
+  color: #ffffff;  
+}
+.fc-button{
+  background-color: #f5f5f5;
+  border-color: #75a434;
+}
+
+.fc-state-active{
+    background-color: #7db038;
+    border-color: #66912f;  
+}
+
+
 /* general */  
 body {
   margin: 10px 10px 40px 10px;
@@ -82,6 +151,7 @@ body {
   margin: 0 auto;
 }
 .fc-content:hover{cursor: pointer;}
+.fc button{padding:0 0.5em;}
 
 /* modals */
 .btn a{color:#fff;}
