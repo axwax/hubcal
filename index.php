@@ -3,8 +3,10 @@
 /* The main calendar page
 **/
 
+// get the root URL (for any resources that need a full path)
 $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
 
+// parse GET data and set up variables
 if($_GET['date']){
   $defaultDate = date("Y-m-d", strtotime($_GET['date']));
   $scrollTime = date("H:i:s", strtotime($_GET['date']));
@@ -68,29 +70,25 @@ else {
 
 </head>
 <body>
-  <header>
-    <button id ="menu-button" type="button" class="btn btn-default">
-      <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-    </button>
-    <!--<div id="buttonhelp">Click here to  choose categories</div>-->
-    <div id="settings">
+	<header>
+		<button id ="menu-button" type="button" class="btn btn-default">
+	    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+		</button>
+		<div id="settings">
       <button id ="close-button" type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
       </button>
-
       <h4>Categories:</h4>
       <ul id="categoryList"></ul><br/>
-      <!--<h4>Calendars:</h4>-->
-      <ul id="feedList"></ul>
       <div>Subscribe to selected categories: 
       <a class="ical" target="_blank"><img width="16" src="/images/google-calendar-64x64.png"/> Add to Google Calendar/Other</a>
       <a class="webcal" target="_blank"><img width="16" src="/images/ical-64x64.png"/> Add to Calendar App (Apple Calendar/Outlook/iPhone?)</a>
       <div id='iCalURL' >
-        <input type="text"/>
+				<input type="text"/>
         <p>Copy the above URL (Windows: CTRL+C, OSX: Command+C) and paste it into any calendar app that takes iCal feeds.</p>
       </div>
       </div>
-              <sub>***It may take a while to import to your calendar - please bear with us, and re-import if it doesn't appear!***</sub>
+      <sub>***It may take a while to import to your calendar - please bear with us, and re-import if it doesn't appear!***</sub>
     </div>
   </header>
 	<div id='calendar'></div>
@@ -171,28 +169,15 @@ $(function() { // document ready
     scrollTime = '06:00:00';
   }
   
-  feeds = {};
-  selectedFeeds = {};
   selectedCategories = {};
   colours = ['', 'Crimson', 'DarkGreen', 'ForestGreen', 'DarkOliveGreen', 'DarkSeaGreen', 'CornflowerBlue', 'Brown', 'BlueViolet', 'Coral', 'CornflowerBlue', 'MidnightBlue', 'DarkBlue', 'DarkGoldenRod', 'Chocolate', 'DarkMagenta', 'Darkorange', 'DarkOrchid', 'DarkRed', 'DarkSalmon', 'DarkSlateBlue', 'DarkSlateGray', 'DarkSlateGrey', 'DarkTurquoise', 'DarkViolet', 'DeepPink', 'DeepSkyBlue', 'DimGray', 'DimGrey', 'DodgerBlue', 'FireBrick', 'Fuchsia', 'Gainsboro', 'Gold', 'GoldenRod', 'Gray', 'Grey', 'Green', 'HoneyDew', 'HotPink', 'IndianRed', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'LavenderBlush', 'LemonChiffon', 'LightBlue', 'LightCoral', 'LightCyan', 'LightGoldenRodYellow', 'LightGray', 'LightGrey', 'LightGreen', 'LightPink', 'LightSalmon', 'LightSeaGreen', 'LightSkyBlue', 'LightSlateGray', 'LightSlateGrey', 'LightSteelBlue', 'LightYellow', 'Lime', 'LimeGreen', 'Linen', 'Magenta', 'Maroon', 'MediumAquaMarine', 'MediumBlue', 'MediumOrchid', 'MediumPurple', 'MediumSeaGreen', 'MediumSlateBlue', 'MediumTurquoise', 'MediumVioletRed', 'MintCream', 'MistyRose', 'Moccasin', 'NavajoWhite', 'Navy', 'OldLace', 'Olive', 'OliveDrab', 'Orange', 'OrangeRed', 'Orchid', 'PaleVioletRed', 'Peru', 'Purple', 'Red', 'RosyBrown', 'RoyalBlue', 'SaddleBrown', 'Salmon', 'SandyBrown', 'SeaGreen', 'SeaShell', 'Sienna', 'Silver', 'SkyBlue', 'SlateBlue', 'SlateGray', 'SlateGrey', 'Snow', 'SpringGreen', 'SteelBlue', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'WhiteSmoke', 'YellowGreen'];
   
   // load the feeds
   $('#progressModal').modal('show');
   $.getJSON( "load-categories.php", function( data ) {
-    feeds = data.feeds;
     categories = data.categories;
     // if we don't have a list of selected feeds in local storage, select all feeds
-    var feedListHTML = '';
     var categoryListHTML = '';
-    
-    // select all feeds if there's no local storage yet
-    selectedFeeds = JSON.parse( localStorage.getItem( 'selectedFeeds' ) );
-    if(typeof selectedFeeds === 'undefined' || selectedFeeds === null){
-      selectedFeeds= {};
-      $.each(feeds, function(feedID, feed){
-        selectedFeeds[feedID] = true;
-      });
-    }
     
     // select all categories if there's no local storage yet
     selectedCategories = JSON.parse( localStorage.getItem( 'selectedCategories' ) );
@@ -202,17 +187,7 @@ $(function() { // document ready
         selectedCategories[categoryID] = true;
       });
     }
-    
-    // display list of feeds and enable all selected ones 
-    $.each(feeds, function(feedID, feed){
-      feeds[feedID]['colour'] = colours[feedID];
-      feedListHTML += '<li class="disabled" id="'+feedID+'" style="background-color: '+colours[feedID]+'; color: white;">'+feed.name+'</li>'
-    });
-    $('#feedList').html(feedListHTML);
-      $.each(selectedFeeds, function(feedID,selected){
-      $('#'+feedID).removeClass('disabled');
-    });
-      
+          
     // display list of categories and enable all selected ones 
     $.each(categories, function(categoryID, category){
       categories[categoryID]['colour'] = colours[categoryID];
@@ -247,16 +222,8 @@ $(function() { // document ready
                   categoriesToFetch[key] = categories[key].colour;
                 }
               });
-              
-              var feedsToFetch = {};
-              $.each(selectedFeeds, function(key, selected){
-                if (typeof feeds[key] !== 'undefined') {
-                  feedsToFetch[key] = feeds[key].colour;
-                }               
-              });
               return {
-                  categories: categoriesToFetch,
-                  feeds: feedsToFetch
+                  categories: categoriesToFetch
               };
           },
           error: function() {
@@ -314,26 +281,12 @@ $(function() { // document ready
       },
     });
 		// replace buttons with icons
-		$(".fc-month-button").html('<i class="icon icon-month"></i>');
-		$(".fc-agendaWeek-button,.fc-basicWeek-button").html('<i class="icon icon-week"></i>');
-		$(".fc-agendaDay-button,.fc-basicDay-button,.fc-list-button").html('<i class="icon icon-day"></i>');
-		$(".fc-listMonth-button").html('<i class="icon icon-list"></i>');
+		$(".fc-month-button").html('<i class="icon icon-month" title="month view"></i>');
+		$(".fc-agendaWeek-button,.fc-basicWeek-button").html('<i class="icon icon-week" title="week view"></i>');
+		$(".fc-agendaDay-button,.fc-basicDay-button,.fc-list-button").html('<i class="icon icon-day" title="day view"></i>');
+		$(".fc-listMonth-button").html('<i class="icon icon-list" title="list view"></i>');
 		
   });
-	
-  // click handler for feedList
-  $('#feedList').on('click','li',function(event){
-		$(this).toggleClass("disabled");
-
-		selectedFeeds = {};
-		$('#feedList li:not(.disabled)').each(function(index, element){
-			var feedID = $(element).attr('id');
-			console.log(feedID);
-			selectedFeeds[feedID] = true;
-		});
-		localStorage.setItem( 'selectedFeeds', JSON.stringify(selectedFeeds) );
-		$('#calendar').fullCalendar('refetchEvents');
-	});
   
   // click handler for categoryList
   $('#categoryList').on('click','li',function(event){
