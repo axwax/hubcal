@@ -5,10 +5,6 @@
  * parses and sanitises them and stores them in the events table
 **/
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
 set_time_limit(100); // try to increase the PHP time limit to 100s
 
 require_once('class.iCalReader.php');
@@ -53,7 +49,10 @@ foreach ($feeds as $index => $feed){
     $mail_pattern = "/([A-z0-9\._-]+\@[A-z0-9_-]+\.)([A-z0-9\_\-\.]{1,}[A-z])/";
     $body = preg_replace($mail_pattern, '<a href="mailto:$1$2">$1$2</a>', $body);
     
+    // if we don't have a start date we can't add the event
     if(empty($event['DTSTART'])) continue;
+    
+    // validate and format the event data
     $start = date(DATE_ISO8601, $ical->iCalDateToUnixTimestamp($event['DTSTART']));
     $end = (!empty($event['DTEND']) ? date(DATE_ISO8601, $ical->iCalDateToUnixTimestamp($event['DTEND'])) : false);
 
@@ -65,6 +64,7 @@ foreach ($feeds as $index => $feed){
     $attachment = (!empty($event['ATTACH']) ? $event['ATTACH'] : false);
     $sequence = (!empty($event['SEQUENCE']) ? $event['SEQUENCE'] : false);
 
+    // insert the event into the database
     $aFields = array(
                       'feedID' =>$feed['id'],
                       'UID' => $uid,
@@ -97,6 +97,7 @@ echo "<br/>finished storing events";
 $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
 echo "<br/>This script took $executionTime to execute.";
 
+// tidy up various escaped characters
 function tidy($txt){
   $tidy = str_replace("\\n"," <br/>",$txt);
   $tidy = str_replace("\\,",",",$tidy);

@@ -11,10 +11,6 @@
  * JSON-formatted list of events objects
 **/
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
 require_once('class.iCalReader.php');
 require_once('includes/hubconfig.php');
 require_once('includes/db-functions.php');
@@ -39,7 +35,6 @@ else{
 $feeds = db_select('feeds', array('*'), $where);
 $feeds = $feeds['result'];
 $theFeeds = array();
-
 foreach($feeds as $feed){
   $theFeeds[$feed['id']] = $feed;  
 }

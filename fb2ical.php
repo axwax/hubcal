@@ -5,11 +5,6 @@
 // which needs to have the domain hosting hubcal added to settings|basic|app domains
 // add your access token to includes/hubconfig.php
 
-
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
 require_once('iCalcreator/iCalcreator.php');
 require_once('includes/hubconfig.php');
 
