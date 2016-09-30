@@ -16,4 +16,5 @@ foreach($categories as $category){
   $theCategories[$category['id']] = $category;  
 }
 
-echo json_encode(array('categories' => $theCategories, 'feeds' => array()));
+// output as JSON
+echo json_encode(array('categories' => $theCategories));
