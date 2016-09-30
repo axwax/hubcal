@@ -49,7 +49,9 @@ else {
 <meta property="og:description" content="View and subscribe to a variety of events feeds from ethical, environmental and sustainability projects in Cambridge." />
 <meta property="og:url" content="<?php echo $root; ?>" />
 <meta property="og:site_name" content="HubCal - Cambridge Hub's Ethical & Sustainable Calendar" />
-<meta property="og:image" content="<?php echo $root; ?>images/green-calendar-2015-11-09.png" />
+<meta property="og:image" content="<?php echo $root; ?>images/hubcal1200.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 
 <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.css' rel='stylesheet' />
 <link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.print.css' rel='stylesheet' media='print' />
