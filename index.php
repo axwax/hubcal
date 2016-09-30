@@ -76,6 +76,7 @@ else {
 		<button id ="menu-button" type="button" class="btn btn-default">
 	    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 		</button>
+		<img class="desktop-logo" src="images/hubcal-logo.png" width="175" height="32"/>
 		<div id="settings">
       <button id ="close-button" type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

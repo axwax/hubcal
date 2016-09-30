@@ -67,6 +67,10 @@ body {
   height: auto;
 }
 
+/* logo */
+header{max-width: 900px; margin: 0 auto;}
+.desktop-logo{float: right;}
+.mobile .desktop-logo{display: none;}
 
 /* settings button */
 #menu-button {
