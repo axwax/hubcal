@@ -17,7 +17,7 @@
 * [iCalcreator](http://kigkonsult.se/iCalcreator/) version 2.22
 
 ## Javascript / CSS
-* [Moment.js](http://momentjs.com/) version 2.15.0
-* [jQuery](https://jquery.com/) version 3.1.0
-* [FullCalendar](http://fullcalendar.io) version 3.0.0
+* [Moment.js](http://momentjs.com/) version 2.9.0
+* [jQuery](https://jquery.com/) version 2.1.3
+* [FullCalendar](http://fullcalendar.io) version 2.4.0
 * [Bootstrap](http://getbootstrap.com/) version 3.3.5
