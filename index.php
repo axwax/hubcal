@@ -323,7 +323,7 @@ $(function() { // document ready
 });
 
 function updateLinks(categoriesArray){
-    var mergeURL = 'green-calendar.gigx.co.uk/merge-feeds.php?categories='+Object.keys(selectedCategories).join();
+    var mergeURL = '<?php echo $root; ?>/merge-feeds.php?categories='+Object.keys(selectedCategories).join();
     var webcalURL = 'webcal://'+mergeURL;
     var iCalURL = 'http://'+mergeURL;
     $('#settings #iCalURL input').val(iCalURL);  
