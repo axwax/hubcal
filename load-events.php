@@ -16,7 +16,6 @@ require_once('includes/hubconfig.php');
 require_once('includes/db-functions.php');
 db_auth($db,$user,$pw);
 
-// TODO: Sanitise!!!!
 $requestedCategories = $_POST['categories'];
 $start = date("Y-m-d", strtotime($_POST['start'] . " -1 month"));
 $end = date("Y-m-d", strtotime($_POST['end'] . " +1 month"));
@@ -25,6 +24,10 @@ $end = date("Y-m-d", strtotime($_POST['end'] . " +1 month"));
 $where = '';
 if($requestedCategories){
   $requestedCategoryIDs = array_keys($requestedCategories);
+  // sanitise category ids before making the database call
+  foreach($requestedCategoryIDs as $id){
+    if(!is_numeric($id)) die('[]');
+  }
   $where ="`category` IN (" . implode(',', $requestedCategoryIDs) . ")";
 }
 else{
