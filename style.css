@@ -47,24 +47,7 @@
 .icon:before{
   font-size: 1.22em;
   vertical-align: middle;
-  color: #75a434;
 }
-.icon:hover:before{
-  color: #66912f;  
-}
-.fc-state-active .icon:before{
-  color: #ffffff;  
-}
-.fc-button{
-  background-color: #f5f5f5;
-  border-color: #75a434;
-}
-
-.fc-state-active{
-    background-color: #7db038;
-    border-color: #66912f;  
-}
-
 
 /* general */  
 body {
@@ -91,18 +74,15 @@ body {
   margin-bottom: 10px;
 }
 
-
-
 /* settings / feeds */
 #settings {
-    background-color: #eee;
     padding: 3px 5px;
     width: auto;
     margin: 0 auto 10px auto;
     display: inline-block;
     border-radius: 5px;
 }
-#settings .header {display: none; text-align: right; background-color: #ddd;}
+#settings .header {display: none; text-align: right;}
 #settings h4{display: inline-block;}
 #categoryList {display:inline;margin: 0;}
 #categoryList li {
@@ -119,13 +99,19 @@ body {
              0 0 2px rgba(255, 255, 255, 0.3) inset,
              0 1px 2px rgba(0, 0, 0, 0.29);
 }
-#categoryList li.disabled{
-	background-color: transparent !important;
-	color: #666 !important;
-	border: 1px solid #666;
-}
 
 #settings #iCalURL input{width: 100%; max-width: 600px;}
+
+/* calendar */
+#calendar {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.fc-content:hover{cursor: pointer;}
+.fc button{padding:0 0.5em;}
+
+/* modals */
+#progressModal{top:30%;}
 
 /* responsive stuff */
 #menu-button {display: inline-block;}
@@ -143,21 +129,35 @@ body {
 .mobile #feedList li {display: block;}
 .mobile .fc-center {margin-top: 1em;}
 
-/* calendar */
-#calendar {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.fc-content:hover{cursor: pointer;}
-.fc button{padding:0 0.5em;}
-
-/* modals */
-.btn a{color:#fff;}
-#progressModal{top:30%;}
-
 /* colour scheme */
+#settings {background-color: #eee;}
+#settings .header {background-color: #ddd;}
+#categoryList li.disabled{
+	background-color: transparent !important;
+	color: #666 !important;
+	border: 1px solid #666;
+}
 .btn-primary{background-color: #8dc63f; border-color: #75a434;}
 .btn-primary:hover, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
     background-color: #7db038;
     border-color: #304416;
+}
+.btn a{color:#fff;}
+.icon:before{
+  color: #75a434;
+}
+.icon:hover:before{
+  color: #66912f;  
+}
+.fc-state-active .icon:before{
+  color: #ffffff;  
+}
+.fc-button{
+  background-color: #f5f5f5;
+  border-color: #75a434;
+}
+
+.fc-state-active{
+    background-color: #7db038;
+    border-color: #66912f;  
 }
