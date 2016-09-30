@@ -141,27 +141,27 @@ header{max-width: 900px; margin: 0 auto;}
 	color: #666 !important;
 	border: 1px solid #666;
 }
-.btn-primary{background-color: #8dc63f; border-color: #75a434;}
+.btn-primary{background-color: #f94c08; border-color: #c30800;}
 .btn-primary:hover, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover {
-    background-color: #7db038;
-    border-color: #304416;
+    background-color: #c30800;
+    border-color: #800000;
 }
 .btn a{color:#fff;}
 .icon:before{
-  color: #75a434;
+  color: #e43700;
 }
 .icon:hover:before{
-  color: #66912f;  
+  color: #c30800;  
 }
 .fc-state-active .icon:before{
   color: #ffffff;  
 }
 .fc-button{
   background-color: #f5f5f5;
-  border-color: #75a434;
+  border-color: #800000;
 }
 
 .fc-state-active{
-    background-color: #7db038;
-    border-color: #66912f;  
+    background-color: #eb3f00;
+    border-color: #800000;  
 }
