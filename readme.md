@@ -1,3 +1,5 @@
+![hubCal](https://github.com/axwax/hubcal/raw/master/images/hubcal1200.jpg "hubCal")
+
 # Installation
 ## 1. Download the latest version
 * Go to the [Releases](https://github.com/axwax/hubcal/releases) page to download the latest stable version.
