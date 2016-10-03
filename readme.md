@@ -21,16 +21,19 @@
 * execute the file in the browser
 * to edit or delete feeds you will need to edit the feeds table in the database directly
 List of categories and their IDs:
-1. Umbrella Groups
-2. Environment - Energy, Sustainability & Ethical Finance
-3. Environment- Conservation
-4. Environment- Ethical Consumerism
-5. Environment- Food Waste & Food Shortage
-6. Education
-7. Homelessness
-8. Health & Wellbeing
-9. International Volunteering
-10. International Campaigning
+
+| ID | Name |
+| ---: | --- |
+| 1 | Umbrella Groups |
+| 2 | Environment - Energy, Sustainability & Ethical Finance |
+| 3 | Environment- Conservation |
+| 4 | Environment- Ethical Consumerism |
+| 5 | Environment- Food Waste & Food Shortage |
+| 6 | Education |
+| 7 | Homelessness |
+| 8 | Health & Wellbeing |
+| 9 | International Volunteering |
+| 10 | International Campaigning |
 
 ## 5. Set up Cron Job for events import:
 To update the events you will need to set up a cron job to run the store-event file once a day. For debugging purposes you can also manually update the events table by running `http://your-server.com/store-events.php`
