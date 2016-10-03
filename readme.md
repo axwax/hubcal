@@ -1,4 +1,7 @@
 # Installation
+## Create a MySQL database:
+* 
+
 ## Set up Cron Job for events import:
 * `crontab -e`
 * add a call to the store-events.php script, for example:
@@ -10,6 +13,8 @@
     you may also have to adjust the path to php
     
 * `:wq` to save and exit (or `:q!` to quit without saving)
+
+make sure your max_execution_time setting for php cli is sufficiently high - the script can easily exceed 30s execution time!
 
 ## To add feeds for a public Facebook page:
 * you will have to set up a facebook app at https://developers.facebook.com/apps, which needs to have the domain hosting hubcal added to settings|basic|app domains.
