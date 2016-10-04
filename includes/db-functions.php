@@ -113,7 +113,6 @@ function db_update($sTable, $aFields = array(), $aIDField) {
  */
 
 function db_select($sTable, $aColumns=array("*"), $aWhere = array(), $aOrderby = array()) {
-  //db_auth();
 
   // asterisk is a special case that doesn't want backticks
   $sColumn = ($aColumns==array("*") ? "*" : ("`" . implode("`, `", $aColumns) . "`"));
@@ -142,7 +141,6 @@ function db_select($sTable, $aColumns=array("*"), $aWhere = array(), $aOrderby =
       $sQuery .= "`$key` $direction";
     }
   }
-  //print_r($sQuery);
   $rResult = mysql_query($sQuery);
 
   $aResult = array();
