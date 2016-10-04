@@ -53,8 +53,8 @@ else {
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 
-<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.css' rel='stylesheet' />
-<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.print.css' rel='stylesheet' media='print' />
+<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css' rel='stylesheet' />
+<link href='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.print.css' rel='stylesheet' media='print' />
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
 <link href="style.css" rel="stylesheet" />
 
@@ -66,8 +66,8 @@ else {
 <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/locale/en-gb.js'></script>
 <script src="//code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/fullcalendar.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.0/locale/en-gb.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/locale/en-gb.js'></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
 </head>
