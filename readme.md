@@ -63,7 +63,7 @@ make sure your max_execution_time setting for php cli is sufficiently high - the
 * [iCalcreator](http://kigkonsult.se/iCalcreator/) version 2.22
 
 ## Javascript / CSS
-* [Moment.js](http://momentjs.com/) version 2.9.0
-* [jQuery](https://jquery.com/) version 2.1.3
+* [Moment.js](http://momentjs.com/) version 2.15.1
+* [jQuery](https://jquery.com/) version 3.1.1
 * [FullCalendar](http://fullcalendar.io) version 3.0.1
-* [Bootstrap](http://getbootstrap.com/) version 3.3.5
+* [Bootstrap](http://getbootstrap.com/) version 3.3.7
