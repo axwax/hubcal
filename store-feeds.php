@@ -4,6 +4,7 @@
  * dodgy script to add feed sources to the feeds table in the database
  * this does not check if a feed has already been added
  * so you'll have to use a database admin tool to keep this table tidy if you make any mistakes
+ * also, by default it adds the feed to category 1 (umbrella groups) - change below if necessary
 **/
 
 require_once('class.iCalReader.php');
@@ -11,6 +12,7 @@ require_once('includes/hubconfig.php');
 require_once('includes/db-functions.php');
 db_auth($db,$user,$pw);
 
+$category = 1;
 $feedURLs = array();
 
 /*
@@ -28,7 +30,7 @@ $feedURLs['Cambridge Hub'] = http://your-hubcal-url.com/fb2ical.php?id=Cambridge
 
 $feedcount = 0;
 foreach ($feedURLs as $name => $url){
-  $aFields = array ('name' => $name, 'url' => $url, 'category' => 1);
+  $aFields = array ('name' => $name, 'url' => $url, 'category' => $category);
   db_insert('feeds', $aFields); 
   $feedcount++;
 }
