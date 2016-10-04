@@ -63,9 +63,9 @@ else {
 <link rel="apple-touch-icon-precomposed" href="<?php echo $root; ?>images/calendar-icon-180x180.png">
 <meta name="msapplication-TileImage" content="<?php echo $root; ?>images/calendar-icon-270x270.png">
 
-<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js'></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/locale/en-gb.js'></script>
-<script src="//code.jquery.com/jquery-3.1.0.min.js"   integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="   crossorigin="anonymous"></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/locale/en-gb.js'></script>
+<script src="//code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js'></script>
 <script src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/locale/en-gb.js'></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
