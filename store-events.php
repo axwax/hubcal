@@ -21,9 +21,10 @@ db_auth($db,$user,$pw);
 $feeds = db_select('feeds', array('*'));
 $feeds = $feeds['result'];
 
+echo (!empty($_SERVER['HTTP_HOST']) ? "<pre>\r\n" : ""); // formatting for web view
 // loop through all feed sources
 foreach ($feeds as $index => $feed){
-  echo "<h2>fetching feed <b>".$feed['id'].") ".$feed['name']."</b></h2>";
+  echo "fetching feed ".$feed['id'].") ".$feed['name']."\r\n";
   
   // fetch events for feed source
   $ical   = new ICal($feed['url']);
@@ -83,19 +84,20 @@ foreach ($feeds as $index => $feed){
     if(!empty($result['error'])){
       // the event already exists - only update if there has been a revision
       if($sequence){
-        echo "&nbsp;&nbsp;updating event <b>".$uid."</b> ".$title."<br/>";
+        echo "\tupdating event ".$uid." ".$title."\r\n";
         db_update('events', $aFields, array('UID'=>$uid));
       }
     }
     else {
-      echo "&nbsp;&nbsp;adding event <b>".$uid."</b> ".$title."<br/>";        
+      echo "&nbsp;&nbsp;adding event ".$uid." ".$title."\r\n";        
     }
   }
   
 }
-echo "<br/>finished storing events";
+echo "\r\nfinished storing events\r\n";
 $executionTime = microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"];
-echo "<br/>This script took $executionTime to execute.";
+echo "\r\nThis script took $executionTime to execute.\r\n";
+echo (!empty($_SERVER['HTTP_HOST']) ? "</pre>\r\n" : ""); // formatting for web view
 
 // tidy up various escaped characters
 function tidy($txt){
