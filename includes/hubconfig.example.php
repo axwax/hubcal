@@ -26,4 +26,6 @@ $facebook_app_token = "";
 
 // end configuration - do not edit below this line
 ///////////////////////////
-$root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+if(!empty($_SERVER['HTTP_HOST'])){ // do not define root when run in php cli
+  $root = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
+}
